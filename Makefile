@@ -9,7 +9,7 @@ test:
 	@jslint --color bin/*.js lib/*.js ${tests}
 	@mocha --reporter list
 
-release: test phantom
+release: test
 ifeq (v${version},$(shell git tag -l v${version}))
 	@echo "Version ${version} already released!"
 	@exit 1
