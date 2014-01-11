@@ -28,6 +28,6 @@
     "jslint"        : "~0.2.5",
     "phantomic"     : "~0.2.1"
   },
-  "files"           : ["lib", "README.md", "CHANGES.md", "LICENSE"],
+  "files"           : ["bin", "lib", "README.md", "LICENSE"],
   "license"         : "MIT"
 }
