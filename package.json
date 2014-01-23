@@ -1,6 +1,6 @@
 {
   "name"            : "mocaccino",
-  "version"         : "0.1.1",
+  "version"         : "0.2.0",
   "description"     : "Make Mocha play nicely with Browserify",
   "keywords"        : ["mocha", "runner", "stream"],
   "author"          : "Maximilian Antoni (http://maxantoni.de)",
