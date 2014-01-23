@@ -5,13 +5,19 @@
  *
  * @license MIT
  */
-/*globals describe, it*/
+/*globals window, describe, it*/
 'use strict';
+
+window.process = {
+  exit: function () {
+    console.log('Mocaccino FTW!');
+  }
+};
 
 describe('fixture', function () {
 
   it('passes', function () {
-    console.log('Mocaccino FTW!');
+    return;
   });
 
 });

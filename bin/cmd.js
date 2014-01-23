@@ -11,15 +11,19 @@
 var mocaccino = require('../lib/mocaccino');
 
 var options = {};
+var input   = process.stdin;
 var argv    = process.argv.slice(2);
 
-if (argv[0] === '--browser' || argv[0] === '-b') {
-  options.browser = true;
-  argv.shift();
-}
-var input = process.stdin;
-if (argv.length) {
-  input = argv[0];
+var arg;
+while (argv.length) {
+  arg = argv.shift();
+  if (arg === '--browser' || arg === '-b') {
+    options.browser = true;
+  } else if (arg === '--reporter' || arg === '-r') {
+    options.reporter = argv.shift();
+  } else {
+    input = arg;
+  }
 }
 
 mocaccino(input, options).pipe(process.stdout);

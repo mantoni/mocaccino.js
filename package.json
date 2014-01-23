@@ -24,7 +24,7 @@
     "through"       : "~2.3.4"
   },
   "devDependencies" : {
-    "mocha"         : ">=1.14 <2",
+    "mocha"         : ">=1.17 <2",
     "jslint"        : "~0.2.5",
     "phantomic"     : "~0.2.1"
   },

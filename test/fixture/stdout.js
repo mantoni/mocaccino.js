@@ -5,8 +5,16 @@
  *
  * @license MIT
  */
-/*globals describe, it*/
+/*globals window, describe, it*/
 'use strict';
+
+window.process = {
+  stdout: {
+    write: function (out) {
+      console.log(out);
+    }
+  }
+};
 
 describe('fixture', function () {
 

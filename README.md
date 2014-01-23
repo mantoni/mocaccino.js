@@ -17,16 +17,7 @@ npm install mocaccino -g
 If you chose a local install (without the `-g`), you find the mocaccino
 executable in `node_modules/.bin/mocaccino`.
 
-Mocaccino takes a script and wraps it with a Mocha test runner and a custom
-Mocha reporter that works in node and the browser.
-
-### Run with node
-
-Browserify a test and run in node:
-
-```
-$ browserify --bare test.js | mocaccino | node
-```
+Mocaccino takes a script and wraps it with a Mocha test runner.
 
 ### Headless browser testing
 
@@ -36,15 +27,17 @@ Browserify a test and run in a headless browser (requires [Phantomic][]):
 $ browserify test.js | mocaccino --browser | phantomic
 ```
 
-Passing `--browser` (or just `-b`) will also include
-`node_modules/mocha/mocha.js` in the script.
+Passing `--browser` (`-b`) includes `node_modules/mocha/mocha.js` in
+the script.
 
-### Code coverage with node
+### Mocha reporters
 
-Assert code coverage with [Coverify][]:
+By default, the "tap" reporter is used. To use other reporters like "list" or
+"spec", you will need [brout][] and then configure the the reporter with
+`--reporter` (`-r`):
 
 ```
-$ browserify --bare -t coverify test.js | mocaccino | node | coverify
+$ browserify ./node_modules/brout test.js | mocaccino -b --reporter list | phantomic
 ```
 
 ### Code coverage with headless browser
@@ -55,6 +48,13 @@ Assert code coverage with [Coverify][] and when running through [Phantomic][]:
 $ browserify --bare -t coverify test.js | mocaccino -b | phantomic | coverify
 ```
 
+### Code coverage with node
+
+Assert code coverage with [Coverify][]:
+
+```
+$ browserify --bare -t coverify test.js | mocaccino | node | coverify
+```
 
 ## API
 
@@ -88,3 +88,4 @@ MIT
 [Browserify]: http://browserify.org
 [Coverify]: https://github.com/substack/coverify
 [Phantomic]: https://github.com/mantoni/phantomic
+[brout]: https://github.com/mantoni/brout.js
