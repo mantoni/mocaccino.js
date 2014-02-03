@@ -1,5 +1,9 @@
 # Changes
 
+## 0.2.1
+
+Resolve Mocha properly
+
 ## 0.2.0
 
 Support most Mocha reporters when used with `brout`
