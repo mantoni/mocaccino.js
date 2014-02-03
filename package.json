@@ -14,7 +14,8 @@
   },
   "scripts"         : {
     "start"         : "mocha --watch",
-    "test"          : "make test"
+    "lint"          : "jslint --color -- ./**/*.js",
+    "test"          : "npm run lint && mocha -R spec"
   },
   "repository"      : {
     "type"          : "git",
