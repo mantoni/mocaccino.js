@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.0
+
+Rewrote Mocaccino as Browserify plugin
+
 ## 0.2.1
 
 Resolve Mocha properly
