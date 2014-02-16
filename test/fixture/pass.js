@@ -11,7 +11,7 @@
 describe('fixture', function () {
 
   it('passes', function () {
-    console.log('Mocaccino FTW!');
+    return;
   });
 
 });

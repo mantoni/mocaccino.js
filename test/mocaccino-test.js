@@ -8,107 +8,132 @@
 /*globals describe, it*/
 'use strict';
 
-var assert = require('assert');
-var exec   = require('child_process').exec;
-var fs     = require('fs');
+var assert     = require('assert');
+var browserify = require('browserify');
+var spawn      = require('child_process').spawn;
+var mocaccino  = require('../lib/mocaccino');
 
-var mocaccino = require('../lib/mocaccino');
 
-function run(cmd, done, cb) {
-  return exec(cmd, function (err, stdout) {
+function run(proc, b, opts, done) {
+  var p = spawn(proc);
+  var s = b.bundle(opts);
+  s.on('error', function (err) {
+    done(err);
+  });
+  var out = '';
+  p.stdout.on('data', function (data) {
+    out += data;
+  });
+  p.stderr.pipe(process.stderr);
+  p.on('close', function (code) {
+    done(null, code, out);
+  });
+  s.pipe(p.stdin);
+}
+
+
+var bundleOptionsBare = {
+  detectGlobal     : true,
+  insertGlobalVars : ['__dirname', '__filename']
+};
+
+function passOutputAssert(done) {
+  return function (err, code, out) {
     if (err) {
       done(err);
     } else {
-      cb(stdout);
-    }
-  });
-}
-
-function fork(cmd, pipeThrough, done) {
-  return run(cmd, done, function (stdout) {
-    var node = run(pipeThrough, done, function (stdout) {
-      assert(stdout.indexOf('fixture') !== -1);
-      assert(stdout.indexOf('Mocaccino FTW!') !== -1);
-      assert(stdout.indexOf('# fail 0') !== -1);
-      assert(stdout.indexOf('# pass 1') !== -1);
+      assert.equal(code, 0);
+      assert.equal(out, '1..1\n'
+        + 'ok 1 fixture passes\n'
+        + '# tests 1\n'
+        + '# pass 1\n'
+        + '# fail 0\n');
       done();
-    });
-    node.stdin.write(stdout);
-    node.stdin.end();
-  });
+    }
+  };
 }
 
-function pipeFixture(cmd, name) {
-  fs.createReadStream('test/fixture/' + name + '.js').pipe(cmd.stdin);
+function failOutputAssert(done) {
+  return function (err, code, out) {
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(code, 1);
+      assert.equal(out.substring(0, 28), '1..1\nnot ok 1 fixture fails\n');
+      assert(out.indexOf('# tests 1\n# pass 0\n# fail 1') > 1);
+      done();
+    }
+  };
 }
 
-describe('mocaccino', function () {
-  this.timeout(5000);
 
-  it('pipes a mocha test to node', function (done) {
-    var cmd = fork('bin/cmd.js', 'node', done);
-    pipeFixture(cmd, 'pass');
-  });
+describe('plugin', function () {
 
-  it('pipes a mocha test for browsers to phantomic', function (done) {
-    var cmd = fork('bin/cmd.js --browser', 'phantomic', done);
-    pipeFixture(cmd, 'pass');
-  });
+  describe('phantomjs', function () {
 
-  it('pipes a mocha test for browsers to phantomic (short)', function (done) {
-    var cmd = fork('bin/cmd.js -b', 'phantomic', done);
-    pipeFixture(cmd, 'pass');
-  });
-
-  it('reads a mocha test and pipes it to node', function (done) {
-    fork('bin/cmd.js test/fixture/pass.js', 'node', done);
-  });
-
-  it('errs on failing test', function (done) {
-    run('bin/cmd.js test/fixture/fail.js', done, function (stdout) {
-      var node = exec('node', function (err, stdout) {
-        assert(!!err);
-        assert(stdout.indexOf('not ok 1 fixture fails') !== -1);
-        assert(stdout.indexOf('Error: Ouch!') !== -1);
-        assert(stdout.indexOf('# fail 1') !== -1);
-        assert(stdout.indexOf('# pass 0') !== -1);
-        done();
-      });
-      node.stdin.write(stdout);
-      node.stdin.end();
+    it('passes', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/pass');
+      b.plugin(mocaccino);
+      run('phantomic', b, {}, passOutputAssert(done));
     });
-  });
 
-  it('invokes process.exit in browsers', function (done) {
-    var cmd = fork('bin/cmd.js -b', 'phantomic', done);
-    pipeFixture(cmd, 'exit');
-  });
-
-  it('uses the given reporter in node', function (done) {
-    run('bin/cmd.js -r list test/fixture/pass.js', done, function (stdout) {
-      var node = exec('node', function (err, stdout) {
-        assert(!err);
-        assert(stdout.indexOf('fixture passes:') !== -1);
-        assert(stdout.indexOf('1 passing') !== -1);
-        done();
-      });
-      node.stdin.write(stdout);
-      node.stdin.end();
+    it('fails', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/fail');
+      b.plugin(mocaccino);
+      run('phantomic', b, {}, failOutputAssert(done));
     });
-  });
 
-  it('uses the given reporter in browser', function (done) {
-    run('bin/cmd.js -b -r list test/fixture/stdout.js', done,
-      function (stdout) {
-        var node = exec('phantomic', function (err, stdout) {
-          assert(!err);
-          assert(stdout.indexOf('fixture passes') !== -1);
-          assert(stdout.indexOf('%d passing') !== -1);
+    it('reporter', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/pass');
+      b.plugin(mocaccino, { reporter : 'list' });
+      run('phantomic', b, {}, function (err, code, out) {
+        /*jslint regexp: true*/
+        if (err) {
+          done(err);
+        } else {
+          assert.equal(code, 0);
+          assert(/fixture passes\:.*[0-9]+ms/.test(out), out);
           done();
-        });
-        node.stdin.write(stdout);
-        node.stdin.end();
+        }
       });
+    });
+
+  });
+
+  describe('node', function () {
+
+    it('passes', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/pass');
+      b.plugin(mocaccino, { node : true });
+      run('node', b, bundleOptionsBare, passOutputAssert(done));
+    });
+
+    it('fails', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/fail');
+      b.plugin(mocaccino, { node : true });
+      run('node', b, bundleOptionsBare, failOutputAssert(done));
+    });
+
+    it('reporter', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/pass');
+      b.plugin(mocaccino, { node : true, reporter : 'list' });
+      run('node', b, bundleOptionsBare, function (err, code, out) {
+        /*jslint regexp: true*/
+        if (err) {
+          done(err);
+        } else {
+          assert.equal(code, 0);
+          assert(/fixture passes\:.*[0-9]+ms/.test(out), out);
+          done();
+        }
+      });
+    });
   });
 
 });

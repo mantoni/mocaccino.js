@@ -1,6 +1,6 @@
 # mocaccino [![Build Status](https://secure.travis-ci.org/mantoni/mocaccino.js.png?branch=master)](http://travis-ci.org/mantoni/mocaccino.js)
 
-Make [Mocha][] play nicely with [Browserify][].
+[Mocha][] test runner as a [Browserify][] plugin.
 
 Repository: <https://github.com/mantoni/mocaccino.js>
 
@@ -14,70 +14,40 @@ npm install mocaccino -g
 
 ## Usage
 
-If you chose a local install (without the `-g`), you find the mocaccino
-executable in `node_modules/.bin/mocaccino`.
-
-Mocaccino takes a script and wraps it with a Mocha test runner.
-
-### Headless browser testing
-
-Browserify a test and run in a headless browser (requires [Phantomic][]):
+Mocaccino is a browserify plugin:
 
 ```
-$ browserify test.js | mocaccino --browser | phantomic
-```
+browserify -p [ mocaccino OPTIONS ]
 
-Passing `--browser` (`-b`) includes `node_modules/mocha/mocha.js` in
-the script.
+where OPTIONS are:
 
-### Mocha reporters
-
-By default, the "tap" reporter is used. To use other reporters like "list" or
-"spec", you will need [brout][] and then configure the the reporter with
-`--reporter` (`-r`):
+  --reporter, -r  Mocha reporter to use, defaults to "tap"
+  --node          If result is used in node instead of a browser
 
 ```
-$ browserify ./node_modules/brout test.js | mocaccino -b --reporter list | phantomic
+
+## Headless browser testing
+
+Browserify a test and run in a Phantom.JS with [Phantomic][]:
+
+```
+$ browserify -p mocaccino test.js | phantomic
 ```
 
 ### Code coverage with headless browser
 
-Assert code coverage with [Coverify][] and when running through [Phantomic][]:
+Use the [Coverify][] transform and [Phantomic][]:
 
 ```
-$ browserify --bare -t coverify test.js | mocaccino -b | phantomic | coverify
+$ browserify --bare -p mocaccino -t coverify test.js | phantomic | coverify
 ```
 
 ### Code coverage with node
 
-Assert code coverage with [Coverify][]:
+Use the [Coverify][] transform and node:
 
 ```
-$ browserify --bare -t coverify test.js | mocaccino | node | coverify
-```
-
-## API
-
-Wrap a file:
-
-```js
-var mocaccino = require('mocaccino');
-
-var outputStream = mocaccino('some/script.js');
-```
-
-Wrap a stream:
-
-```js
-var outputStream = mocaccino(process.stdin);
-```
-
-Options:
-
-```js
-var outputStream = mocaccino(process.stdin, {
-  browser : true
-});
+$ browserify --bare -p mocaccino -t coverify test.js | node | coverify
 ```
 
 ## License
@@ -88,4 +58,3 @@ MIT
 [Browserify]: http://browserify.org
 [Coverify]: https://github.com/substack/coverify
 [Phantomic]: https://github.com/mantoni/phantomic
-[brout]: https://github.com/mantoni/brout.js
