@@ -21,7 +21,7 @@ browserify -p [ mocaccino OPTIONS ]
 
 where OPTIONS are:
 
-  --reporter, -r  Mocha reporter to use, defaults to "tap"
+  --reporter, -R  Mocha reporter to use, defaults to "tap"
   --node          If result is used in node instead of a browser
 
 ```
@@ -39,7 +39,7 @@ $ browserify -p mocaccino test.js | phantomic
 Use the [Coverify][] transform and [Phantomic][]:
 
 ```
-$ browserify --bare -p mocaccino -t coverify test.js | phantomic | coverify
+$ browserify -p mocaccino -t coverify test.js | phantomic | coverify
 ```
 
 ### Code coverage with node
@@ -47,7 +47,7 @@ $ browserify --bare -p mocaccino -t coverify test.js | phantomic | coverify
 Use the [Coverify][] transform and node:
 
 ```
-$ browserify --bare -p mocaccino -t coverify test.js | node | coverify
+$ browserify --bare -p [ mocaccino --node ] -t coverify test.js | node | coverify
 ```
 
 ## License
