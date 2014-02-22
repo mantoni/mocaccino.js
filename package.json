@@ -1,7 +1,7 @@
 {
   "name"            : "mocaccino",
   "version"         : "0.3.0",
-  "description"     : "Make Mocha play nicely with Browserify",
+  "description"     : "Mocha test runner as a Browserify plugin",
   "keywords"        : ["mocha", "runner", "stream", "browserify-plugin"],
   "author"          : "Maximilian Antoni (http://maxantoni.de)",
   "homepage"        : "https://github.com/mantoni/mocaccino.js",
