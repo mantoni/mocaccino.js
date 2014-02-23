@@ -10,6 +10,7 @@
 
 var assert     = require('assert');
 var browserify = require('browserify');
+var coverify   = require('coverify');
 var spawn      = require('child_process').spawn;
 var mocaccino  = require('../lib/mocaccino');
 
@@ -66,28 +67,65 @@ function failOutputAssert(done) {
   };
 }
 
+function coverage(callback) {
+  return function (err, code, out) {
+    if (err) {
+      callback(err);
+    } else {
+      assert.equal(code, 0);
+      var cov = spawn('coverify');
+      //cov.stderr.pipe(process.stderr);
+      cov.stdin.write(out);
+      cov.stdin.end();
+      cov.on('exit', callback);
+    }
+  };
+}
+
 
 describe('plugin', function () {
 
   describe('phantomjs', function () {
 
-    it('passes', function (done) {
+    it('passes test', function (done) {
       var b = browserify();
-      b.add('./test/fixture/pass');
+      b.add('./test/fixture/test-pass');
       b.plugin(mocaccino);
       run('phantomic', b, {}, passOutputAssert(done));
     });
 
-    it('fails', function (done) {
+    it('fails test', function (done) {
       var b = browserify();
-      b.add('./test/fixture/fail');
+      b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
       run('phantomic', b, {}, failOutputAssert(done));
     });
 
-    it('reporter', function (done) {
+    it('passes coverage', function (done) {
       var b = browserify();
-      b.add('./test/fixture/pass');
+      b.add('./test/fixture/cover-pass');
+      b.transform(coverify);
+      b.plugin(mocaccino);
+      run('phantomic', b, {}, coverage(function (code) {
+        assert.equal(code, 0);
+        done();
+      }));
+    });
+
+    it('fails coverage', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/cover-fail');
+      b.transform(coverify);
+      b.plugin(mocaccino);
+      run('phantomic', b, {}, coverage(function (code) {
+        assert.notEqual(code, 0);
+        done();
+      }));
+    });
+
+    it('uses reporter', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { reporter : 'list' });
       run('phantomic', b, {}, function (err, code, out) {
         /*jslint regexp: true*/
@@ -95,7 +133,7 @@ describe('plugin', function () {
           done(err);
         } else {
           assert.equal(code, 0);
-          assert(/fixture passes\:.*[0-9]+ms/.test(out), out);
+          assert(/passes\:.*[0-9]+ms/.test(out), out);
           done();
         }
       });
@@ -105,23 +143,45 @@ describe('plugin', function () {
 
   describe('node', function () {
 
-    it('passes', function (done) {
+    it('passes test', function (done) {
       var b = browserify();
-      b.add('./test/fixture/pass');
+      b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { node : true });
       run('node', b, bundleOptionsBare, passOutputAssert(done));
     });
 
-    it('fails', function (done) {
+    it('fails test', function (done) {
       var b = browserify();
-      b.add('./test/fixture/fail');
+      b.add('./test/fixture/test-fail');
       b.plugin(mocaccino, { node : true });
       run('node', b, bundleOptionsBare, failOutputAssert(done));
     });
 
-    it('reporter', function (done) {
+    it('passes coverage', function (done) {
       var b = browserify();
-      b.add('./test/fixture/pass');
+      b.add('./test/fixture/cover-pass');
+      b.transform(coverify);
+      b.plugin(mocaccino, { node : true });
+      run('node', b, bundleOptionsBare, coverage(function (code) {
+        assert.equal(code, 0);
+        done();
+      }));
+    });
+
+    it('fails coverage', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/cover-fail');
+      b.transform(coverify);
+      b.plugin(mocaccino, { node : true });
+      run('node', b, bundleOptionsBare, coverage(function (code) {
+        assert.notEqual(code, 0);
+        done();
+      }));
+    });
+
+    it('uses reporter', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { node : true, reporter : 'list' });
       run('node', b, bundleOptionsBare, function (err, code, out) {
         /*jslint regexp: true*/
@@ -129,7 +189,7 @@ describe('plugin', function () {
           done(err);
         } else {
           assert.equal(code, 0);
-          assert(/fixture passes\:.*[0-9]+ms/.test(out), out);
+          assert(/passes\:.*[0-9]+ms/.test(out), out);
           done();
         }
       });
