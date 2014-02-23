@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.1
+
+Don't screw up [coverify][] output
+
 ## 0.3.0
 
 Rewrote Mocaccino as Browserify plugin
@@ -21,3 +25,5 @@ Support most Mocha reporters when used with `brout`
 ## 0.1.0
 
 Initial release
+
+[coveify]: https://github.com/substack/coverify
