@@ -1,35 +1,38 @@
 {
-  "name"            : "mocaccino",
-  "version"         : "0.3.1",
-  "description"     : "Mocha test runner as a Browserify plugin",
-  "keywords"        : ["mocha", "runner", "stream", "browserify-plugin"],
-  "author"          : "Maximilian Antoni (http://maxantoni.de)",
-  "homepage"        : "https://github.com/mantoni/mocaccino.js",
-  "main"            : "./lib/mocaccino.js",
-  "engines"         : {
-    "node"          : ">=0.10"
+  "name": "mocaccino",
+  "version": "0.3.1",
+  "description": "Mocha test runner as a Browserify plugin",
+  "keywords": ["mocha", "runner", "stream", "browserify-plugin"],
+  "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de)",
+  "contributors": [
+    "Andrey Popp <8mayday@gmail.com>"
+  ],
+  "homepage": "https://github.com/mantoni/mocaccino.js",
+  "main": "./lib/mocaccino.js",
+  "engines": {
+    "node": ">=0.10"
   },
-  "scripts"         : {
-    "start"         : "mocha --watch",
-    "lint"          : "jslint --color -- ./**/*.js",
-    "test"          : "npm run lint && mocha -R spec"
+  "scripts": {
+    "start": "mocha --watch",
+    "lint": "jslint --color -- ./**/*.js",
+    "test": "npm run lint && mocha -R spec"
   },
-  "repository"      : {
-    "type"          : "git",
-    "url"           : "https://github.com/mantoni/mocaccino.js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mantoni/mocaccino.js.git"
   },
-  "dependencies"    : {
-    "through"       : "~2.3.4",
-    "resolve"       : "~0.6.1",
-    "brout"         : "~0.1.3"
+  "dependencies": {
+    "through": "~2.3.4",
+    "resolve": "~0.6.1",
+    "brout": "~0.1.3"
   },
-  "devDependencies" : {
-    "mocha"         : ">=1.17 <2",
-    "jslint"        : "~0.2.5",
-    "phantomic"     : "~0.4.0",
-    "browserify"    : "~3.30.1",
-    "coverify"      : "~1.0.6"
+  "devDependencies": {
+    "mocha": ">=1.17 <2",
+    "jslint": "~0.2.5",
+    "phantomic": "~0.5.0",
+    "browserify": "~3.30.1",
+    "coverify": "~1.0.6"
   },
-  "files"           : ["lib", "README.md", "LICENSE"],
-  "license"         : "MIT"
+  "files": ["lib", "README.md", "LICENSE"],
+  "license": "MIT"
 }
