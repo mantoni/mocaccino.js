@@ -1,6 +1,6 @@
 {
   "name": "mocaccino",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Mocha test runner as a Browserify plugin",
   "keywords": ["mocha", "runner", "stream", "browserify-plugin"],
   "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de)",

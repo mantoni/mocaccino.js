@@ -1,5 +1,11 @@
 # Changes
 
+## 0.4.0
+
+- Include Mocha via Browserify (Andrey Popp)
+- Remove `Function.prototype.bind` shim since Phantomic 0.5 always includes
+  es5-shim (Andrey Popp)
+
 ## 0.3.1
 
 Don't screw up [coverify][] output
@@ -26,4 +32,4 @@ Support most Mocha reporters when used with `brout`
 
 Initial release
 
-[coveify]: https://github.com/substack/coverify
+[coverify]: https://github.com/substack/coverify
