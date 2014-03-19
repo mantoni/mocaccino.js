@@ -86,7 +86,7 @@ function coverage(callback) {
 describe('plugin', function () {
 
   describe('phantomjs', function () {
-    this.timeout(5000);
+    this.timeout(10000);
 
     it('passes test', function (done) {
       var b = browserify();
