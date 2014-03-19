@@ -1,5 +1,9 @@
 # Changes
 
+## 0.4.2
+
+- Allow to use Mocaccino output in a browser with [coverify][]
+
 ## 0.4.1
 
 - Fix `describe.only` and `it.only` (Andrey Popp)

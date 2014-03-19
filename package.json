@@ -1,8 +1,13 @@
 {
   "name": "mocaccino",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Mocha test runner as a Browserify plugin",
-  "keywords": ["mocha", "runner", "stream", "browserify-plugin"],
+  "keywords": [
+    "mocha",
+    "runner",
+    "stream",
+    "browserify-plugin"
+  ],
   "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de)",
   "contributors": [
     "Andrey Popp <8mayday@gmail.com>"
@@ -33,6 +38,10 @@
     "browserify": "~3.30.1",
     "coverify": "~1.0.6"
   },
-  "files": ["lib", "README.md", "LICENSE"],
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT"
 }
