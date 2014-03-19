@@ -1,5 +1,9 @@
 # Changes
 
+## 0.4.1
+
+- Fix `describe.only` and `it.only` (Andrey Popp)
+
 ## 0.4.0
 
 - Include Mocha via Browserify (Andrey Popp)
