@@ -139,6 +139,16 @@ describe('plugin', function () {
       });
     });
 
+    it('only', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-only');
+      b.plugin(mocaccino);
+      run('phantomic', b, {}, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
+
   });
 
   describe('node', function () {
@@ -194,6 +204,17 @@ describe('plugin', function () {
         }
       });
     });
+
+    it('only', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-only');
+      b.plugin(mocaccino, { node : true });
+      run('node', b, bundleOptionsBare, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
+
   });
 
 });
