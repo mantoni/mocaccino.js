@@ -1,5 +1,10 @@
 # Changes
 
+## 0.5.0
+
+- Yield every 250 milliseconds by default to allow pending I/O to happen
+- Add `--yields` / `-y` option to configure yield interval
+
 ## 0.4.2
 
 - Allow to use Mocaccino output in a browser with [coverify][]
