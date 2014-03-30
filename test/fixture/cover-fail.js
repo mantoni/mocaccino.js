@@ -18,6 +18,10 @@ describe('cover', function () {
     return a || notCalled();
   }
 
+  it('yields', function (done) {
+    setTimeout(done, 50);
+  });
+
   it('fails', function () {
     test(true);
   });

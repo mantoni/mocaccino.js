@@ -106,7 +106,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/cover-pass');
       b.transform(coverify);
-      b.plugin(mocaccino);
+      b.plugin(mocaccino, { yields : 25 });
       run('phantomic', b, {}, coverage(function (code) {
         assert.equal(code, 0);
         done();
@@ -117,7 +117,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/cover-fail');
       b.transform(coverify);
-      b.plugin(mocaccino);
+      b.plugin(mocaccino, { yields : 25 });
       run('phantomic', b, {}, coverage(function (code) {
         assert.notEqual(code, 0);
         done();
