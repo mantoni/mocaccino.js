@@ -22,9 +22,12 @@ browserify -p [ mocaccino OPTIONS ]
 where OPTIONS are:
 
   --reporter, -R  Mocha reporter to use, defaults to "tap"
+  --yields, -y    Yield every N milliseconds, defaults to 250
   --node          If result is used in node instead of a browser
-
 ```
+
+The `yields` option causes a tiny delay every N milliseconds to allow pending
+I/O to happen. It's ignored if `--node` is given.
 
 ## Headless browser testing
 
