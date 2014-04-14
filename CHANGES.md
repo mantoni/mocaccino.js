@@ -1,5 +1,9 @@
 # Changes
 
+## 0.6.0
+
+- Bump [brout][] and verify [phantomic][] can be used with `--brout`
+
 ## 0.5.0
 
 - Yield every 250 milliseconds by default to allow pending I/O to happen
@@ -46,3 +50,5 @@ Support most Mocha reporters when used with `brout`
 Initial release
 
 [coverify]: https://github.com/substack/coverify
+[brout]: https://github.com/mantoni/brout.js
+[phantomic]: https://github.com/mantoni/phantomic
