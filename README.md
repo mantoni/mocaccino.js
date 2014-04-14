@@ -34,7 +34,7 @@ I/O to happen. It's ignored if `--node` is given.
 Browserify a test and run in a Phantom.JS with [Phantomic][]:
 
 ```
-$ browserify -p mocaccino test.js | phantomic
+$ browserify -p mocaccino test.js | phantomic --brout
 ```
 
 ### Code coverage with headless browser
@@ -42,7 +42,7 @@ $ browserify -p mocaccino test.js | phantomic
 Use the [Coverify][] transform and [Phantomic][]:
 
 ```
-$ browserify -p mocaccino -t coverify test.js | phantomic | coverify
+$ browserify -p mocaccino -t coverify test.js | phantomic --brout | coverify
 ```
 
 ### Code coverage with node
