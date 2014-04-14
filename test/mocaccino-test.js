@@ -15,8 +15,8 @@ var spawn      = require('child_process').spawn;
 var mocaccino  = require('../lib/mocaccino');
 
 
-function run(proc, b, opts, done) {
-  var p = spawn(proc);
+function run(proc, args, b, opts, done) {
+  var p = spawn(proc, args);
   var s = b.bundle(opts);
   s.on('error', function (err) {
     done(err);
@@ -92,14 +92,28 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino);
-      run('phantomic', b, {}, passOutputAssert(done));
+      run('phantomic', [], b, {}, passOutputAssert(done));
+    });
+
+    it('passes --brout test', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino);
+      run('phantomic', ['--brout'], b, {}, passOutputAssert(done));
     });
 
     it('fails test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
-      run('phantomic', b, {}, failOutputAssert(done));
+      run('phantomic', [], b, {}, failOutputAssert(done));
+    });
+
+    it('fails --brout test', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-fail');
+      b.plugin(mocaccino);
+      run('phantomic', ['--brout'], b, {}, failOutputAssert(done));
     });
 
     it('passes coverage', function (done) {
@@ -107,7 +121,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-pass');
       b.transform(coverify);
       b.plugin(mocaccino, { yields : 25 });
-      run('phantomic', b, {}, coverage(function (code) {
+      run('phantomic', [], b, {}, coverage(function (code) {
         assert.equal(code, 0);
         done();
       }));
@@ -118,7 +132,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-fail');
       b.transform(coverify);
       b.plugin(mocaccino, { yields : 25 });
-      run('phantomic', b, {}, coverage(function (code) {
+      run('phantomic', [], b, {}, coverage(function (code) {
         assert.notEqual(code, 0);
         done();
       }));
@@ -128,7 +142,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { reporter : 'list' });
-      run('phantomic', b, {}, function (err, code, out) {
+      run('phantomic', [], b, {}, function (err, code, out) {
         /*jslint regexp: true*/
         if (err) {
           done(err);
@@ -144,7 +158,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-only');
       b.plugin(mocaccino);
-      run('phantomic', b, {}, function (err, code) {
+      run('phantomic', [], b, {}, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -158,14 +172,14 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { node : true });
-      run('node', b, bundleOptionsBare, passOutputAssert(done));
+      run('node', [], b, bundleOptionsBare, passOutputAssert(done));
     });
 
     it('fails test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino, { node : true });
-      run('node', b, bundleOptionsBare, failOutputAssert(done));
+      run('node', [], b, bundleOptionsBare, failOutputAssert(done));
     });
 
     it('passes coverage', function (done) {
@@ -173,7 +187,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-pass');
       b.transform(coverify);
       b.plugin(mocaccino, { node : true });
-      run('node', b, bundleOptionsBare, coverage(function (code) {
+      run('node', [], b, bundleOptionsBare, coverage(function (code) {
         assert.equal(code, 0);
         done();
       }));
@@ -184,7 +198,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-fail');
       b.transform(coverify);
       b.plugin(mocaccino, { node : true });
-      run('node', b, bundleOptionsBare, coverage(function (code) {
+      run('node', [], b, bundleOptionsBare, coverage(function (code) {
         assert.notEqual(code, 0);
         done();
       }));
@@ -194,7 +208,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { node : true, reporter : 'list' });
-      run('node', b, bundleOptionsBare, function (err, code, out) {
+      run('node', [], b, bundleOptionsBare, function (err, code, out) {
         /*jslint regexp: true*/
         if (err) {
           done(err);
@@ -210,7 +224,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-only');
       b.plugin(mocaccino, { node : true });
-      run('node', b, bundleOptionsBare, function (err, code) {
+      run('node', [], b, bundleOptionsBare, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
