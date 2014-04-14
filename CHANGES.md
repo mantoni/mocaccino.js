@@ -3,6 +3,7 @@
 ## 0.6.0
 
 - Bump [brout][] and verify [phantomic][] can be used with `--brout`
+- Fix path to setup file on windows
 
 ## 0.5.0
 
