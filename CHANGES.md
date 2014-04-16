@@ -1,5 +1,10 @@
 # Changes
 
+## 0.6.1
+
+- Pass on terminal window width
+- Use ascii dot symbol for compatibility
+
 ## 0.6.0
 
 - Bump [brout][] and verify [phantomic][] can be used with `--brout`
