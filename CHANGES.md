@@ -1,5 +1,9 @@
 # Changes
 
+## 0.6.2
+
+- Lame cygwin thing with `getWindowSize`
+
 ## 0.6.1
 
 - Pass on terminal window width
