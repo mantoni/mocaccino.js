@@ -34,7 +34,7 @@ function run(proc, args, b, opts, done) {
 
 
 var bundleOptionsBare = {
-  detectGlobal     : true,
+  detectGlobals    : false,
   insertGlobalVars : ['__dirname', '__filename']
 };
 

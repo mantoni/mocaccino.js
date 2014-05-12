@@ -35,7 +35,7 @@
     "mocha": "^1.17.1",
     "jslint": "~0.3.1",
     "phantomic": "^0.7.0",
-    "browserify": "^3.30.1",
+    "browserify": "^4.1.2",
     "coverify": "^1.0.6"
   },
   "files": [
