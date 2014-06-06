@@ -43,12 +43,12 @@ function passOutputAssert(done) {
     if (err) {
       done(err);
     } else {
-      assert.equal(code, 0);
       assert.equal(out, '1..1\n'
         + 'ok 1 fixture passes\n'
         + '# tests 1\n'
         + '# pass 1\n'
         + '# fail 0\n');
+      assert.equal(code, 0);
       done();
     }
   };
@@ -164,6 +164,13 @@ describe('plugin', function () {
       });
     });
 
+    it('requires mocha', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-require-mocha');
+      b.plugin(mocaccino);
+      run('phantomic', [], b, {}, passOutputAssert(done));
+    });
+
   });
 
   describe('node', function () {
@@ -228,6 +235,13 @@ describe('plugin', function () {
         assert.equal(code, 0);
         done(err);
       });
+    });
+
+    it('requires mocha', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-require-mocha');
+      b.plugin(mocaccino, { node : true });
+      run('node', [], b, bundleOptionsBare, passOutputAssert(done));
     });
 
   });
