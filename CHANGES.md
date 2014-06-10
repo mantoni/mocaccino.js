@@ -1,5 +1,9 @@
 # Changes
 
+## 0.6.4
+
+- Use `process.nextTick` to yield instead of `setTimeout`
+
 ## 0.6.3
 
 - Support `require('mocha')`

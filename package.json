@@ -1,6 +1,6 @@
 {
   "name": "mocaccino",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Mocha test runner as a Browserify plugin",
   "keywords": [
     "mocha",
