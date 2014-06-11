@@ -154,6 +154,13 @@ describe('plugin', function () {
       });
     });
 
+    it('uses ui exports', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-ui-exports');
+      b.plugin(mocaccino, { ui : 'exports' });
+      run('phantomic', [], b, {}, passOutputAssert(done));
+    });
+
     it('only', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-only');
@@ -225,6 +232,13 @@ describe('plugin', function () {
           done();
         }
       });
+    });
+
+    it('uses ui exports', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-ui-exports');
+      b.plugin(mocaccino, { node : true, ui : 'exports' });
+      run('node', [], b, bundleOptionsBare, passOutputAssert(done));
     });
 
     it('only', function (done) {
