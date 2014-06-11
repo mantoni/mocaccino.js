@@ -10,7 +10,8 @@
   ],
   "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de)",
   "contributors": [
-    "Andrey Popp <8mayday@gmail.com>"
+    "Andrey Popp <8mayday@gmail.com>",
+    "Mikela Clemmons <glassresistor@gmail.com>"
   ],
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
