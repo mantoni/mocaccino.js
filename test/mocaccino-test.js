@@ -154,10 +154,17 @@ describe('plugin', function () {
       });
     });
 
-    it('uses ui exports', function (done) {
+    it('uses ui "bdd"', function (done) {
       var b = browserify();
-      b.add('./test/fixture/test-ui-exports');
-      b.plugin(mocaccino, { ui : 'exports' });
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { ui : 'bdd' });
+      run('phantomic', [], b, {}, passOutputAssert(done));
+    });
+
+    it('uses ui "tdd"', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-ui-tdd');
+      b.plugin(mocaccino, { ui : 'tdd' });
       run('phantomic', [], b, {}, passOutputAssert(done));
     });
 
@@ -234,10 +241,17 @@ describe('plugin', function () {
       });
     });
 
-    it('uses ui exports', function (done) {
+    it('uses ui "bdd"', function (done) {
       var b = browserify();
-      b.add('./test/fixture/test-ui-exports');
-      b.plugin(mocaccino, { node : true, ui : 'exports' });
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { node : true, ui : 'bdd' });
+      run('node', [], b, bundleOptionsBare, passOutputAssert(done));
+    });
+
+    it('uses ui "tdd"', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-ui-tdd');
+      b.plugin(mocaccino, { node : true, ui : 'tdd' });
       run('node', [], b, bundleOptionsBare, passOutputAssert(done));
     });
 

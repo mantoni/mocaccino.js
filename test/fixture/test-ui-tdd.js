@@ -5,14 +5,14 @@
  *
  * @license MIT
  */
+/*global suite, test*/
 'use strict';
 
-module.exports = {
 
-  fixture: {
-    passes: function () {
-      return;
-    }
-  }
+suite('fixture', function () {
 
-};
+  test('passes', function () {
+    return;
+  });
+
+});
