@@ -1,5 +1,9 @@
 # Changes
 
+## 0.7.0
+
+- Added `ui` and `U` options so one can select BDD/TDD/QUnit (Mikela Clemmons)
+
 ## 0.6.4
 
 - Use `process.nextTick` to yield instead of `setTimeout`
