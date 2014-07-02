@@ -1,5 +1,9 @@
 # Changes
 
+## 0.x.y
+
+- Added `timeout` and `t` options so one can test async scripts that last longer than `2000ms`
+
 ## 0.7.0
 
 - Added `ui` and `U` options so one can select BDD/TDD/QUnit (Mikela Clemmons)
