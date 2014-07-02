@@ -26,7 +26,7 @@ function run(proc, args, b, opts, done) {
     out += data;
   });
   p.stderr.pipe(process.stderr);
-  p.on('exit', function (code) {
+  p.on('close', function (code) {
     done(null, code, out);
   });
   s.pipe(p.stdin);
