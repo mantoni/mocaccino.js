@@ -185,6 +185,16 @@ describe('plugin', function () {
       run('phantomic', [], b, {}, passOutputAssert(done));
     });
 
+    it('uses timeout', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-timeout');
+      b.plugin(mocaccino, { timeout : 4000 });
+      run('phantomic', ['--brout'], b, {}, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
+
   });
 
   describe('node', function () {
@@ -270,6 +280,16 @@ describe('plugin', function () {
       b.add('./test/fixture/test-require-mocha');
       b.plugin(mocaccino, { node : true });
       run('node', [], b, bundleOptionsBare, passOutputAssert(done));
+    });
+
+    it('uses timeout', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-timeout');
+      b.plugin(mocaccino, { node : true, timeout : 4000 });
+      run('node', [], b, bundleOptionsBare, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
     });
 
   });
