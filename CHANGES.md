@@ -1,6 +1,6 @@
 # Changes
 
-## 0.x.y
+## 0.8.0
 
 - Added `timeout` and `t` options so one can test async scripts that last longer than `2000ms`
 
