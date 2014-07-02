@@ -26,7 +26,7 @@ function run(proc, args, b, opts, done) {
     out += data;
   });
   p.stderr.pipe(process.stderr);
-  p.on('close', function (code) {
+  p.on('exit', function (code) {
     done(null, code, out);
   });
   s.pipe(p.stdin);
@@ -189,7 +189,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-timeout');
       b.plugin(mocaccino, { timeout : 4000 });
-      run('phantomic', [], b, {}, function (err, code) {
+      run('phantomic', ['--brout'], b, {}, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -285,7 +285,7 @@ describe('plugin', function () {
     it('uses timeout', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-timeout');
-      b.plugin(mocaccino, { node : true, timeout : 3500 });
+      b.plugin(mocaccino, { node : true, timeout : 4000 });
       run('node', [], b, bundleOptionsBare, function (err, code) {
         assert.equal(code, 0);
         done(err);
