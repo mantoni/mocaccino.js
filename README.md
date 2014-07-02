@@ -22,6 +22,7 @@ browserify -p [ mocaccino OPTIONS ]
 where OPTIONS are:
 
   --reporter, -R  Mocha reporter to use, defaults to "tap"
+  --timeout, -t   Mocha timeout in milliseconds to use, defaults to 2000
   --ui, -U        Mocha user interface to use, defaults to "bdd"
   --yields, -y    Yield every N milliseconds, defaults to 250
   --node          If result is used in node instead of a browser
