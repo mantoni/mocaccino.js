@@ -21,8 +21,8 @@
   },
   "scripts": {
     "start": "mocha --watch",
-    "lint": "jslint --color './**/*.js'",
-    "test": "npm run lint && mocha -R spec --timeout 5000"
+    "lint": "jslint --color \"**/*.js\"",
+    "test": "npm run lint && mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
