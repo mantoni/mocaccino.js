@@ -34,11 +34,11 @@
     "brout": "~0.2.0"
   },
   "devDependencies": {
-    "mocha": "^1.17.1",
-    "jslint": "~0.5.2",
-    "phantomic": "^0.7.0",
-    "browserify": "^4.1.2",
-    "coverify": "^1.0.6"
+    "mocha": "^1.21",
+    "jslint": "^0.6",
+    "phantomic": "^0.10",
+    "browserify": "^5.9",
+    "coverify": "^1.0"
   },
   "files": [
     "lib",
