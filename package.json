@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "through2": "^0.5",
-    "resolve": "~0.6.1",
-    "brout": "~0.2.0",
+    "resolve": "^0.7",
+    "brout": "^1.0",
     "listen": "^1.0"
   },
   "devDependencies": {
