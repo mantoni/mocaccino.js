@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.1
+
+- Fix brout resolving
+
 ## 1.0.0
 
 - Require Browserify 5
