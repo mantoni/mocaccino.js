@@ -282,7 +282,7 @@ describe('plugin', function () {
       run('node', [], b, passOutputAssert(done));
     });
 
-    it.skip('uses timeout', function (done) {
+    it('uses timeout', function (done) {
       var b = browserify(bundleOptionsBare);
       b.add('./test/fixture/test-timeout');
       b.plugin(mocaccino, { node : true, timeout : 4000 });
