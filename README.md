@@ -55,6 +55,12 @@ Use the [Coverify][] transform and node:
 $ browserify --bare -p [ mocaccino --node ] -t coverify test.js | node | coverify
 ```
 
+## Compatibility
+
+- Node 0.10 or later
+- Browserify 5.9 or later (since version 1.0.0)
+- Browserify 4.x (before 1.0.0)
+
 ## License
 
 MIT
