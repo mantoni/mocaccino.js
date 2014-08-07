@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.2
+
+- Fix issue with multiple push calls to through2
+
 ## 1.0.1
 
 - Fix brout resolving
