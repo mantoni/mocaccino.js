@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.3
+
+- Fix brout resolution for Windows
+
 ## 1.0.2
 
 - Fix issue with multiple push calls to through2
