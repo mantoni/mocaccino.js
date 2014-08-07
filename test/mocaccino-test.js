@@ -11,11 +11,13 @@
 var assert     = require('assert');
 var browserify = require('browserify');
 var coverify   = require('coverify');
+var listen     = require('listen');
 var spawn      = require('child_process').spawn;
 var mocaccino  = require('../lib/mocaccino');
 
 
 function run(proc, args, b, done) {
+  var l = listen();
   var p = spawn(proc, args);
   var s = b.bundle();
   s.on('error', function (err) {
@@ -25,9 +27,18 @@ function run(proc, args, b, done) {
   p.stdout.on('data', function (data) {
     out += data;
   });
+  p.stdout.on('end', l());
   p.stderr.pipe(process.stderr);
+  var onClose = l('code');
   p.on('close', function (code) {
-    done(null, code, out);
+    onClose(null, code);
+  });
+  l.then(function (err, res) {
+    if (err) {
+      done(err);
+    } else {
+      done(null, res.code, out);
+    }
   });
   s.pipe(p.stdin);
 }
