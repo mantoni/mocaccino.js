@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.4
+
+- Listen to Browserify 'reset' events
+
 ## 1.0.3
 
 - Fix brout resolution for Windows
