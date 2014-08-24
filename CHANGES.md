@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.5
+
+- Fix for calling `b.bundle()` multiple times
+
 ## 1.0.4
 
 - Listen to Browserify 'reset' events
