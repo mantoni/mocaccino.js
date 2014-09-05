@@ -1,4 +1,8 @@
-# mocaccino [![Build Status](https://secure.travis-ci.org/mantoni/mocaccino.js.png?branch=master)](http://travis-ci.org/mantoni/mocaccino.js)
+# mocaccino
+
+[![Build Status]](https://travis-ci.org/mantoni/mocaccino.js)
+[![SemVer]](http://semver.org)
+[![License]](https://github.com/mantoni/mocaccino.js/blob/master/LICENSE)
 
 [Mocha][] test runner as a [Browserify][] plugin.
 
@@ -65,6 +69,9 @@ $ browserify --bare -p [ mocaccino --node ] -t coverify test.js | node | coverif
 
 MIT
 
+[Build Status]: http://img.shields.io/travis/mantoni/mocaccino.js.svg
+[SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
+[License]: http://img.shields.io/npm/l/mocaccino.svg
 [Mocha]: http://visionmedia.github.io/mocha/
 [Browserify]: http://browserify.org
 [Coverify]: https://github.com/substack/coverify
