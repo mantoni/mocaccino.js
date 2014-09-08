@@ -1,5 +1,10 @@
 # Changes
 
+## 1.0.6
+
+- Bump through2, resolve and phantomic
+- Fix coverage for browsers
+
 ## 1.0.5
 
 - Fix for calling `b.bundle()` multiple times
