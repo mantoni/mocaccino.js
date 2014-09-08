@@ -127,7 +127,7 @@ describe('plugin', function () {
       run('phantomic', ['--brout'], b, failOutputAssert(done));
     });
 
-    it.skip('passes coverage', function (done) {
+    it('passes coverage', function (done) {
       var b = browserify();
       b.add('./test/fixture/cover-pass');
       b.transform(coverify);
@@ -138,7 +138,7 @@ describe('plugin', function () {
       }));
     });
 
-    it.skip('fails coverage', function (done) {
+    it('fails coverage', function (done) {
       var b = browserify();
       b.add('./test/fixture/cover-fail');
       b.transform(coverify);
