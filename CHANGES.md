@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.7
+
+- Set window width and dot symbol for node as well
+
 ## 1.0.6
 
 - Bump through2, resolve and phantomic
