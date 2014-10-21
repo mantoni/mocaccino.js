@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.0
+
+- Add support for mocha `grep` option (Daniel Davidson)
+
 ## 1.0.7
 
 - Set window width and dot symbol for node as well
