@@ -93,6 +93,44 @@ function coverage(callback) {
   };
 }
 
+var NUM_TESTS_RE = /%num/g;
+
+function flaggedGrepAssert(done) {
+  return function (err, code, out) {
+    var expected = '1..%num\n'
+      + 'ok %num fixture passes flag\n'
+      + '# tests %num\n'
+      + '# pass %num\n'
+      + '# fail 0\n';
+
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '1'));
+      assert.equal(code, 0);
+      done();
+    }
+  };
+}
+
+function unFlaggedGrepAssert(done) {
+  return function (err, code, out) {
+    var expected = '1..%num\n'
+      + 'ok 1 fixture passes flag\n'
+      + 'ok %num fixture passes without flag\n'
+      + '# tests %num\n'
+      + '# pass %num\n'
+      + '# fail 0\n';
+
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '2'));
+      assert.equal(code, 0);
+      done();
+    }
+  };
+}
 
 describe('plugin', function () {
 
@@ -125,6 +163,20 @@ describe('plugin', function () {
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
       run('phantomic', ['--brout'], b, failOutputAssert(done));
+    });
+
+    it('filters tests when grep is set', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': '#flag'});
+      run('phantomic', [], b, flaggedGrepAssert(done));
+    });
+
+    it('does not filter tests when grep is not set', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino);
+      run('phantomic', [], b, unFlaggedGrepAssert(done));
     });
 
     it('passes coverage', function (done) {
@@ -222,6 +274,20 @@ describe('plugin', function () {
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino, { node : true });
       run('node', [], b, failOutputAssert(done));
+    });
+
+    it('filters tests when grep is set', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': '#flag', 'node': true});
+      run('node', [], b, flaggedGrepAssert(done));
+    });
+
+    it('does not filter tests when grep is not set', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'node': true});
+      run('node', [], b, unFlaggedGrepAssert(done));
     });
 
     it('passes coverage', function (done) {
