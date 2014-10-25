@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.0
+
+- Add support for grep invert option (Daniel Davidson)
+
 ## 1.1.0
 
 - Add support for mocha `grep` option (Daniel Davidson)
