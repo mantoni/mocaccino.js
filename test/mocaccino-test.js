@@ -132,6 +132,24 @@ function unFlaggedGrepAssert(done) {
   };
 }
 
+function invertedFlaggedGrepAssert(done) {
+  return function (err, code, out) {
+    var expected = '1..%num\n'
+      + 'ok %num fixture passes without flag\n'
+      + '# tests %num\n'
+      + '# pass %num\n'
+      + '# fail 0\n';
+
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '1'));
+      assert.equal(code, 0);
+      done();
+    }
+  };
+}
+
 describe('plugin', function () {
 
   describe('phantomjs', function () {
@@ -177,6 +195,13 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino);
       run('phantomic', [], b, unFlaggedGrepAssert(done));
+    });
+
+    it('inverts filter when invert is set', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': '#flag', 'invert': true});
+      run('phantomic', [], b, invertedFlaggedGrepAssert(done));
     });
 
     it('passes coverage', function (done) {
@@ -288,6 +313,13 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, {'node': true});
       run('node', [], b, unFlaggedGrepAssert(done));
+    });
+
+    it('inverts filter when invert is set', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': '#flag', 'invert': true, 'node': true});
+      run('node', [], b, invertedFlaggedGrepAssert(done));
     });
 
     it('passes coverage', function (done) {
