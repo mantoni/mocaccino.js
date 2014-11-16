@@ -6,14 +6,10 @@
 
 [Mocha][] test runner as a [Browserify][] plugin.
 
-Repository: <https://github.com/mantoni/mocaccino.js>
-
----
-
-## Install with npm
+## Install
 
 ```
-npm install mocaccino -g
+npm install mocaccino --save-dev
 ```
 
 ## Usage
