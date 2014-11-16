@@ -28,6 +28,8 @@ where OPTIONS are:
   --ui, -U        Mocha user interface to use, defaults to "bdd"
   --yields, -y    Yield every N milliseconds, defaults to 250
   --node          If result is used in node instead of a browser
+  --windowWidth   Overrides the window width, defaults to the current shells
+                  window width or fall back to 80
 ```
 
 The `yields` option causes a tiny delay every N milliseconds to allow pending
