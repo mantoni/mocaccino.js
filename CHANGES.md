@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.0
+
+- Allow to override the window width                                                                  │[mochify.js master]# v
+
 ## 1.2.0
 
 - Add support for grep invert option (Daniel Davidson)
