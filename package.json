@@ -33,13 +33,14 @@
     "through2": "^0.6",
     "resolve": "^1.0",
     "brout": "^1.0",
-    "listen": "^1.0"
+    "listen": "^1.0",
+    "supports-color": "^1.3"
   },
   "devDependencies": {
-    "mocha": "^1.21",
-    "jslint": "^0.6",
+    "mocha": "^2.2",
+    "jslint": "^0.8",
     "phantomic": "^1.0",
-    "browserify": "^5.9",
+    "browserify": "^9.0",
     "coverify": "^1.0"
   },
   "files": [
