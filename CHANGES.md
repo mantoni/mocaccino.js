@@ -1,5 +1,9 @@
 # Changes
 
+## 1.4.0
+
+- Use same color feature detection as introduced in Mocha 2.2
+
 ## 1.3.0
 
 - Allow to override the window width                                                                  │[mochify.js master]# v
