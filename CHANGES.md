@@ -1,5 +1,10 @@
 # Changes
 
+## 1.5.1
+
+- Improve documentation
+- Add node 0.12 to travis config
+
 ## 1.5.0
 
 - Add options `--colors` and `--no-colors` to explicitly enable or disable colors
