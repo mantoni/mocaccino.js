@@ -21,9 +21,10 @@
     "node": ">=0.10"
   },
   "scripts": {
-    "start": "mocha --watch",
+    "watch": "mocha --watch",
     "lint": "jslint --color \"**/*.js\"",
-    "test": "npm run lint && mocha --timeout 5000"
+    "pretest": "npm run lint",
+    "test": "mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
