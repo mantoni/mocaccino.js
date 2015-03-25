@@ -30,6 +30,8 @@ where OPTIONS are:
   --node          If result is used in node instead of a browser
   --windowWidth   Overrides the window width, defaults to the current shells
                   window width or fall back to 80
+  --no-colors     Disable colors (overrides color support detection)
+  --colors        Enable colors (overrides color support detection)
 ```
 
 The `yields` option causes a tiny delay every N milliseconds to allow pending

@@ -276,9 +276,9 @@ describe('plugin', function () {
     it('uses timeout', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-timeout');
-      b.plugin(mocaccino, { timeout : 4000 });
+      b.plugin(mocaccino, { timeout : 100 });
       run('phantomic', ['--brout'], b, function (err, code) {
-        assert.equal(code, 0);
+        assert.equal(code, 1);
         done(err);
       });
     });
@@ -289,6 +289,28 @@ describe('plugin', function () {
       b.plugin(mocaccino, { windowWidth : 123 });
       run('phantomic', [], b, function (err, code) {
         assert.equal(code, 0);
+        done(err);
+      });
+    });
+
+    it('disables colors', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { colors : false, reporter : 'dot' });
+      run('phantomic', [], b, function (err, code, out) {
+        assert.equal(code, 0);
+        assert.equal(out.trim().split('\n')[0], '.');
+        done(err);
+      });
+    });
+
+    it('enables colors', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { colors : true, reporter : 'dot' });
+      run('phantomic', [], b, function (err, code, out) {
+        assert.equal(code, 0);
+        assert.equal(out.trim().split('\n')[0], '\u001b[90m.\u001b[0m');
         done(err);
       });
     });
@@ -404,9 +426,9 @@ describe('plugin', function () {
     it('uses timeout', function (done) {
       var b = browserify(bundleOptionsBare);
       b.add('./test/fixture/test-timeout');
-      b.plugin(mocaccino, { node : true, timeout : 4000 });
+      b.plugin(mocaccino, { node : true, timeout : 100 });
       run('node', [], b, function (err, code) {
-        assert.equal(code, 0);
+        assert.equal(code, 1);
         done(err);
       });
     });
@@ -417,6 +439,28 @@ describe('plugin', function () {
       b.plugin(mocaccino, { node : true, windowWidth : 123 });
       run('node', [], b, function (err, code) {
         assert.equal(code, 0);
+        done(err);
+      });
+    });
+
+    it('disables colors', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { node : true, colors : false, reporter : 'dot' });
+      run('node', [], b, function (err, code, out) {
+        assert.equal(code, 0);
+        assert.equal(out.trim().split('\n')[0], '.');
+        done(err);
+      });
+    });
+
+    it('enables colors', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { node : true, color : true, reporter : 'dot' });
+      run('node', [], b, function (err, code, out) {
+        assert.equal(code, 0);
+        assert.equal(out.trim().split('\n')[0], '\u001b[90m.\u001b[0m');
         done(err);
       });
     });
