@@ -1,5 +1,9 @@
 # Changes
 
+## 1.5.2
+
+- Update through2 to `^1.1`
+
 ## 1.5.1
 
 - Improve documentation
