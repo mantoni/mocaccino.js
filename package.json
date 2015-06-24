@@ -22,7 +22,7 @@
   },
   "scripts": {
     "watch": "mocha --watch",
-    "lint": "jslint --color \"**/*.js\"",
+    "lint": "jslint --edition=latest --color \"**/*.js\"",
     "pretest": "npm run lint",
     "test": "mocha --timeout 5000"
   },
@@ -31,7 +31,7 @@
     "url": "https://github.com/mantoni/mocaccino.js.git"
   },
   "dependencies": {
-    "through2": "^0.6",
+    "through2": "^1.1",
     "resolve": "^1.0",
     "brout": "^1.0",
     "listen": "^1.0",
@@ -41,7 +41,7 @@
     "mocha": "^2.2",
     "jslint": "^0.8",
     "phantomic": "^1.0",
-    "browserify": "^9.0",
+    "browserify": "^10.2",
     "coverify": "^1.0"
   },
   "files": [
