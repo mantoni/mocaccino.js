@@ -13,7 +13,8 @@
     "Andrey Popp <8mayday@gmail.com>",
     "Mikela Clemmons <glassresistor@gmail.com>",
     "JP Richardson <jprichardson@gmail.com>",
-    "Daniel Davidson <contact@dannydavidson.com>"
+    "Daniel Davidson <contact@dannydavidson.com>",
+    "Matheus Kautzmann <kautzmann5@gmail.com>"
   ],
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
