@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "mocha": "^2.2",
+    "mocha-jenkins-reporter": "^0.1.9",
     "jslint": "^0.8",
     "phantomic": "^1.0",
     "browserify": "^10.2",
