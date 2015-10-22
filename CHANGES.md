@@ -1,5 +1,10 @@
 # Changes
 
+## 1.6.0
+
+- Add support for third party reporters (Matheus Kautzmann)
+- Move mocha from `devDependencies` to `dependencies`
+
 ## 1.5.2
 
 - Update through2 to `^1.1`
