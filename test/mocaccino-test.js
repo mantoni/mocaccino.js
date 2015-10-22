@@ -242,6 +242,22 @@ describe('plugin', function () {
       });
     });
 
+    it('uses custom reporter', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { reporter : 'mocha-jenkins-reporter' });
+      run('phantomic', [], b, function (err, code, out) {
+        /*jslint regexp: true*/
+        if (err) {
+          done(err);
+        } else {
+          assert.equal(code, 0);
+          assert(/passes\:.*[0-9]+ms/.test(out), out);
+          done();
+        }
+      });
+    });
+
     it('uses ui "bdd"', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-pass');
@@ -380,6 +396,25 @@ describe('plugin', function () {
       var b = browserify(bundleOptionsBare);
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { node : true, reporter : 'list' });
+      run('node', [], b, function (err, code, out) {
+        /*jslint regexp: true*/
+        if (err) {
+          done(err);
+        } else {
+          assert.equal(code, 0);
+          assert(/passes\:.*[0-9]+ms/.test(out), out);
+          done();
+        }
+      });
+    });
+
+    it('uses custom reporter', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, {
+        node : true,
+        reporter : 'mocha-jenkins-reporter'
+      });
       run('node', [], b, function (err, code, out) {
         /*jslint regexp: true*/
         if (err) {
