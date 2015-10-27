@@ -1,5 +1,9 @@
 # Changes
 
+## 1.6.1
+
+- Bump Mocha version to use at least 2.3.0 (Matheus Kautzmann)
+
 ## 1.6.0
 
 - Add support for third party reporters (Matheus Kautzmann)
