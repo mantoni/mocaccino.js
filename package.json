@@ -32,7 +32,7 @@
     "url": "https://github.com/mantoni/mocaccino.js.git"
   },
   "dependencies": {
-    "mocha": "^2.2",
+    "mocha": "^2.3",
     "through2": "^1.1",
     "resolve": "^1.0",
     "brout": "^1.0",
