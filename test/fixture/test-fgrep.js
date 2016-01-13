@@ -10,15 +10,11 @@
 
 describe('fixture', function () {
 
-  it('passes #flag', function () {
+  it('passes (.*)', function () {
     return;
   });
 
-  it('passes without flag', function () {
-    return;
-  });
-
-  it('passes with regex grep', function () {
+  it('passes without regex', function () {
     return;
   });
 
