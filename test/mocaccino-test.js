@@ -152,6 +152,24 @@ function regexGrepAssert(done) {
   };
 }
 
+function regexFgrepAssert(done) {
+  return function (err, code, out) {
+    var expected = '1..%num\n'
+      + 'ok 1 fixture passes (.*)\n'
+      + '# tests %num\n'
+      + '# pass %num\n'
+      + '# fail 0\n';
+
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '1'));
+      assert.equal(code, 0);
+      done();
+    }
+  };
+}
+
 function invertedFlaggedGrepAssert(done) {
   return function (err, code, out) {
     var expected = '1..%num\n'
@@ -230,6 +248,13 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, {'grep': /with(out)?/});
       run('phantomic', [], b, regexGrepAssert(done));
+    });
+
+    it('treats fgrep as an ordinary string', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-fgrep');
+      b.plugin(mocaccino, {'fgrep': 'passes (.*)'});
+      run('phantomic', [], b, regexFgrepAssert(done));
     });
 
     it('inverts filter when invert is set', function (done) {
@@ -410,6 +435,13 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, {'grep': /with(out)?/, 'node': true});
       run('node', [], b, regexGrepAssert(done));
+    });
+
+    it('treats fgrep as an ordinary string', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-fgrep');
+      b.plugin(mocaccino, {'fgrep': 'passes (.*)', 'node': true});
+      run('node', [], b, regexFgrepAssert(done));
     });
 
     it('inverts filter when invert is set', function (done) {
