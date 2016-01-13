@@ -1,5 +1,17 @@
 # Changes
 
+## 1.7.0
+
+Brad Buchanan fixed the `grep` behavior to align better with Mocha. See
+[pull request #16](https://github.com/mantoni/mocaccino.js/pull/16).
+
+> Adds the ability to pass the Mocha fgrep option through, so that any users
+> who were depending on the incorrect behavior of `--grep` before can easily
+> switch over to `fgrep` (which is what they want).
+
+- Treat `grep` option as a regular expression. (Brad Buchanan)
+- Add `fgrep` option. (Brad Buchanan)
+
 ## 1.6.1
 
 - Bump Mocha version to use at least 2.3.0 (Matheus Kautzmann)
