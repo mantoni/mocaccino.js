@@ -117,7 +117,27 @@ function unFlaggedGrepAssert(done) {
   return function (err, code, out) {
     var expected = '1..%num\n'
       + 'ok 1 fixture passes flag\n'
-      + 'ok %num fixture passes without flag\n'
+      + 'ok 2 fixture passes without flag\n'
+      + 'ok %num fixture passes with regex grep\n'
+      + '# tests %num\n'
+      + '# pass %num\n'
+      + '# fail 0\n';
+
+    if (err) {
+      done(err);
+    } else {
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '3'));
+      assert.equal(code, 0);
+      done();
+    }
+  };
+}
+
+function regexGrepAssert(done) {
+  return function (err, code, out) {
+    var expected = '1..%num\n'
+      + 'ok 1 fixture passes without flag\n'
+      + 'ok %num fixture passes with regex grep\n'
       + '# tests %num\n'
       + '# pass %num\n'
       + '# fail 0\n';
@@ -135,7 +155,8 @@ function unFlaggedGrepAssert(done) {
 function invertedFlaggedGrepAssert(done) {
   return function (err, code, out) {
     var expected = '1..%num\n'
-      + 'ok %num fixture passes without flag\n'
+      + 'ok 1 fixture passes without flag\n'
+      + 'ok %num fixture passes with regex grep\n'
       + '# tests %num\n'
       + '# pass %num\n'
       + '# fail 0\n';
@@ -143,7 +164,7 @@ function invertedFlaggedGrepAssert(done) {
     if (err) {
       done(err);
     } else {
-      assert.equal(out, expected.replace(NUM_TESTS_RE, '1'));
+      assert.equal(out, expected.replace(NUM_TESTS_RE, '2'));
       assert.equal(code, 0);
       done();
     }
@@ -195,6 +216,20 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino);
       run('phantomic', [], b, unFlaggedGrepAssert(done));
+    });
+
+    it('treats string grep as a regular expression', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': 'with(out)?'});
+      run('phantomic', [], b, regexGrepAssert(done));
+    });
+
+    it('treats RegExp grep as a regular expression', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': /with(out)?/});
+      run('phantomic', [], b, regexGrepAssert(done));
     });
 
     it('inverts filter when invert is set', function (done) {
@@ -361,6 +396,20 @@ describe('plugin', function () {
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, {'node': true});
       run('node', [], b, unFlaggedGrepAssert(done));
+    });
+
+    it('treats string grep as a regular expression', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': 'with(out)?', 'node': true});
+      run('node', [], b, regexGrepAssert(done));
+    });
+
+    it('treats RegExp grep as a regular expression', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-grep');
+      b.plugin(mocaccino, {'grep': /with(out)?/, 'node': true});
+      run('node', [], b, regexGrepAssert(done));
     });
 
     it('inverts filter when invert is set', function (done) {

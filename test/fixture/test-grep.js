@@ -18,4 +18,8 @@ describe('fixture', function () {
     return;
   });
 
+  it('passes with regex grep', function () {
+    return;
+  });
+
 });
