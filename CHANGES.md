@@ -1,5 +1,18 @@
 # Changes
 
+## 1.8.0
+
+Streams 3: bump dependencies so that `through2@2` is used everywhere.
+
+These dependencies have been updated:
+
+- `through2: ^2.0.0`
+- `resolve: ^1.1.6`
+- `brout: ^1.1.0`
+- `supports-color: ^3.1.2`
+
+Test are now using `browserify@13`.
+
 ## 1.7.0
 
 Brad Buchanan fixed the `grep` behavior to align better with Mocha. See
