@@ -1,5 +1,10 @@
 # Changes
 
+## 1.8.1
+
+Nail Mocha to `~2.3.4` to workaround issues with `2.4.x`.
+Follow <https://github.com/mantoni/mochify.js/issues/129> for updates.
+
 ## 1.8.0
 
 Streams 3: bump dependencies so that `through2@2` is used everywhere.
