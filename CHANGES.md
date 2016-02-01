@@ -1,5 +1,10 @@
 # Changes
 
+## 1.8.2
+
+Revert "Nail Mocha to `~2.3.4` to workaround issues with `2.4.x`" since the
+unserlying issue was reverted in Mocha.
+
 ## 1.8.1
 
 Nail Mocha to `~2.3.4` to workaround issues with `2.4.x`.
