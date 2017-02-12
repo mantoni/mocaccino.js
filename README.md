@@ -86,7 +86,7 @@ MIT
 [Build Status]: http://img.shields.io/travis/mantoni/mocaccino.js.svg
 [SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
 [License]: http://img.shields.io/npm/l/mocaccino.svg
-[Mocha]: http://visionmedia.github.io/mocha/
+[Mocha]: http://mochajs.org/
 [Browserify]: http://browserify.org
 [Mochify]: https://github.com/mantoni/mochify.js
 [Phantomic]: https://github.com/mantoni/phantomic
