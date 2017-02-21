@@ -15,7 +15,8 @@
     "JP Richardson <jprichardson@gmail.com>",
     "Daniel Davidson <contact@dannydavidson.com>",
     "Matheus Kautzmann <kautzmann5@gmail.com>",
-    "Brad Buchanan <bradley.c.buchanan@gmail.com>"
+    "Brad Buchanan <bradley.c.buchanan@gmail.com>",
+    "Tomer Lahav <tomer@interlude.fm>"
   ],
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
