@@ -1,9 +1,14 @@
 # Changes
 
+## 1.9.0
+
+- Add support for `reporterOptions` in API (Tomer Lahav)
+- Update Mocha link (Morton Fox)
+
 ## 1.8.2
 
 Revert "Nail Mocha to `~2.3.4` to workaround issues with `2.4.x`" since the
-unserlying issue was reverted in Mocha.
+underlying issue was reverted in Mocha.
 
 ## 1.8.1
 
