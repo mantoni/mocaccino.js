@@ -302,6 +302,27 @@ describe('plugin', function () {
       });
     });
 
+    it('uses reporter options', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, {
+        reporter : 'xunit',
+        reporterOptions: { output: 'report.xml' }
+      });
+      run('phantomic', [], b, function (err, code, out) {
+        /*jslint regexp: true*/
+        if (err) {
+          done(err);
+        } else {
+          // We expect an error code since XUnit reporter
+          // does not support file output in browser
+          assert.equal(code, 1);
+          assert(/file output not supported in browser/.test(out), out);
+          done();
+        }
+      });
+    });
+
     it('uses custom reporter', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-pass');
