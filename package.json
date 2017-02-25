@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@studio/changes": "^1.1.0",
-    "browserify": "^13.0.0",
+    "browserify": "^14.1.0",
     "coverify": "^1.4.1",
     "jslint": "^0.8",
     "mocha-jenkins-reporter": "^0.1.9",
