@@ -35,18 +35,18 @@
   },
   "dependencies": {
     "mocha": "^2.3.4",
-    "through2": "^2.0.0",
-    "resolve": "^1.1.6",
     "brout": "^1.1.0",
     "listen": "^1.0.0",
-    "supports-color": "^3.1.2"
+    "resolve": "^1.1.6",
+    "supports-color": "^3.1.2",
+    "through2": "^2.0.0"
   },
   "devDependencies": {
-    "mocha-jenkins-reporter": "^0.1.9",
-    "jslint": "^0.8",
-    "phantomic": "^1.4.0",
     "browserify": "^13.0.0",
-    "coverify": "^1.4.1"
+    "coverify": "^1.4.1",
+    "jslint": "^0.8",
+    "mocha-jenkins-reporter": "^0.1.9",
+    "phantomic": "^1.4.0"
   },
   "files": [
     "lib",
