@@ -1,5 +1,17 @@
 # Changes
 
+## 2.0.0
+
+- Upgrade Mocha to `^3.2` (Morgan Roderick)
+- Order dependencies by using `npm` command (Morgan Roderick)
+
+    This will make future changesets made with `npm install` read much better,
+    as `npm` commands always sorts dependencies lexicographically.
+
+- Run tests in newer node versions, and remove 0.10, 0.12 (#21) (Morgan
+  Roderick)
+- Use `@studio/changes` instead of make
+
 ## 1.9.0
 
 - Add support for `reporterOptions` in API (Tomer Lahav)
