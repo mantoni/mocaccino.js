@@ -16,7 +16,8 @@
     "Daniel Davidson <contact@dannydavidson.com>",
     "Matheus Kautzmann <kautzmann5@gmail.com>",
     "Brad Buchanan <bradley.c.buchanan@gmail.com>",
-    "Tomer Lahav <tomer@interlude.fm>"
+    "Tomer Lahav <tomer@interlude.fm>",
+    "Morgan Roderick <morgan@roderick.dk>"
   ],
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
