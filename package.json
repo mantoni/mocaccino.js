@@ -27,7 +27,10 @@
     "watch": "mocha --watch",
     "lint": "jslint --edition=latest --color \"**/*.js\"",
     "pretest": "npm run lint",
-    "test": "mocha --timeout 5000"
+    "test": "mocha --timeout 5000",
+    "preversion": "npm test",
+    "version": "changes",
+    "postversion": "git push --follow-tags && npm publish"
   },
   "repository": {
     "type": "git",
@@ -42,6 +45,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
+    "@studio/changes": "^1.1.0",
     "browserify": "^13.0.0",
     "coverify": "^1.4.1",
     "jslint": "^0.8",
