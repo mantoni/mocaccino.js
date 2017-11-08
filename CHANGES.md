@@ -1,5 +1,9 @@
 # Changes
 
+## 3.0.0
+
+- Update to Mocha 4 (Carl-Erik Kopseng)
+
 ## 2.0.0
 
 - Upgrade Mocha to `^3.2` (Morgan Roderick)
