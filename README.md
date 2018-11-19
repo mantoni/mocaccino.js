@@ -1,6 +1,6 @@
 # mocaccino
 
-[![Build Status]](https://travis-ci.org/mantoni/mocaccino.js)
+[![Build Status](https://travis-ci.org/mantoni/mocaccino.js.svg?branch=master)](https://travis-ci.org/mantoni/mocaccino.js)
 [![SemVer]](http://semver.org)
 [![License]](https://github.com/mantoni/mocaccino.js/blob/master/LICENSE)
 
