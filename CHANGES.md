@@ -1,5 +1,28 @@
 # Changes
 
+## 4.0.0
+
+- [`1b3d32a`](https://github.com/mantoni/mocaccino.js/commit/1b3d32ade806842fb10d94985612e58be76e8d0d)
+  Show build status on master branch in README
+- [`575abdc`](https://github.com/mantoni/mocaccino.js/commit/575abdc58975954d2f59fd72a156351c3e63c375)
+  Run builds in Node 6, 8 and 10
+- [`8cfa0ba`](https://github.com/mantoni/mocaccino.js/commit/8cfa0ba7d60ca906a67da3fb0bf3c12edf197afe)
+  Replace jslint with eslint
+- [`da0d287`](https://github.com/mantoni/mocaccino.js/commit/da0d287602278aa59b8b6034939ceb819a0d99ee)
+  Update all transient dependencies
+- [`ca8e25c`](https://github.com/mantoni/mocaccino.js/commit/ca8e25c3fa0b222117b765c7d45d8242e4badc71)
+  Update resolve and through2
+- [`3f3317d`](https://github.com/mantoni/mocaccino.js/commit/3f3317d5ea20c58e19ae032c954aa8c8b98d93f2)
+  Upgrade Mocha to v5
+- [`3bea39e`](https://github.com/mantoni/mocaccino.js/commit/3bea39eb5f2b278dcaa76f4ac6d04cf46fc20e34)
+  Upgrade supports-color to v5
+- [`db00c21`](https://github.com/mantoni/mocaccino.js/commit/db00c21b5a494c9e5ec41806469ccc1a6fa5f426)
+  Upgrade Browserify to v16
+- [`84dd99a`](https://github.com/mantoni/mocaccino.js/commit/84dd99ad718954f614f0327bb772ed377b7b9891)
+  Update @studio/changes for `--commits` and `--footer` support
+
+_Released by [Maximilian Antoni](https://github.com/mantoni) on 2018-11-19._
+
 ## 3.0.0
 
 - Update to Mocha 4 (Carl-Erik Kopseng)
