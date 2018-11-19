@@ -30,7 +30,7 @@
     "pretest": "npm run lint",
     "test": "mocha --timeout 5000",
     "preversion": "npm test",
-    "version": "changes",
+    "version": "changes --commits --footer",
     "postversion": "git push --follow-tags && npm publish"
   },
   "repository": {
@@ -46,7 +46,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "@studio/changes": "^1.1.0",
+    "@studio/changes": "^1.7.0",
     "browserify": "^14.1.0",
     "coverify": "^1.4.1",
     "jslint": "^0.8",
