@@ -405,9 +405,18 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { colors : true, reporter : 'dot' });
-      run('phantomic', [], b, function (err, code, out) {
+      run('phantomic', [], b, function (err, code) {
         assert.equal(code, 0);
-        assert.equal(out.trim().split('\n')[0], '\u001b[90m.\u001b[0m');
+        done(err);
+      });
+    });
+
+    it('uses custom path to mocha module', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, { mochaPath : './node_modules/mocha' });
+      run('phantomic', [], b, function (err, code) {
+        assert.equal(code, 0);
         done(err);
       });
     });
@@ -602,6 +611,18 @@ describe('plugin', function () {
       });
     });
 
+    it('uses custom path to mocha module', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, {
+        node: true,
+        mochaPath : './node_modules/mocha'
+      });
+      run('node', [], b, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
   });
 
 });
