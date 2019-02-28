@@ -1,5 +1,16 @@
 # Changes
 
+## 4.1.0
+
+Adds the `mochaPath` option to specify a custom path to resolve mocha.
+
+- [`aea12b7`](https://github.com/mantoni/mocaccino.js/commit/aea12b70e0540a44bc624999997c7f13282fdd1e)
+  Add support for custom path to mocha module (Christopher Hiller) (#24)
+- [`40e28dc`](https://github.com/mantoni/mocaccino.js/commit/40e28dce56e89faed33398294cf3d00afce21d88)
+  Add contributor
+
+_Released by [Maximilian Antoni](https://github.com/mantoni) on 2019-02-28._
+
 ## 4.0.0
 
 - [`1b3d32a`](https://github.com/mantoni/mocaccino.js/commit/1b3d32ade806842fb10d94985612e58be76e8d0d)
