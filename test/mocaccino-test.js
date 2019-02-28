@@ -412,7 +412,7 @@ describe('plugin', function () {
     });
 
     it('uses custom path to mocha module', function (done) {
-      var b = browserify(bundleOptionsBare);
+      var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { mochaPath : './node_modules/mocha' });
       run('phantomic', [], b, function (err, code) {
