@@ -17,7 +17,8 @@
     "Matheus Kautzmann <kautzmann5@gmail.com>",
     "Brad Buchanan <bradley.c.buchanan@gmail.com>",
     "Tomer Lahav <tomer@interlude.fm>",
-    "Morgan Roderick <morgan@roderick.dk>"
+    "Morgan Roderick <morgan@roderick.dk>",
+    "Christopher Hiller <boneskull@boneskull.com>"
   ],
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
