@@ -68,6 +68,7 @@ where OPTIONS are:
                   window width or fall back to 80
   --no-colors     Disable colors (overrides color support detection)
   --colors        Enable colors (overrides color support detection)
+  --mochaPath     Path to custom Mocha module
 ```
 
 The `yields` option causes a tiny delay every N milliseconds to allow pending
