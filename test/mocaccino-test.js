@@ -14,7 +14,7 @@ var coverify   = require('coverify');
 var listen     = require('listen');
 var spawn      = require('child_process').spawn;
 var mocaccino  = require('../lib/mocaccino');
-
+var path       = require('path');
 
 function run(proc, args, b, done) {
   var l = listen();
@@ -411,7 +411,7 @@ describe('plugin', function () {
       });
     });
 
-    it('uses custom path to mocha module', function (done) {
+    it('uses custom relative path to mocha module', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { mochaPath : './node_modules/mocha' });
@@ -421,6 +421,17 @@ describe('plugin', function () {
       });
     });
 
+    it('uses custom absolute path to mocha module', function (done) {
+      var b = browserify();
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, {
+        mochaPath : path.join(process.cwd(), 'node_modules', 'mocha')
+      });
+      run('phantomic', [], b, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
   });
 
   describe('node', function () {
@@ -611,12 +622,25 @@ describe('plugin', function () {
       });
     });
 
-    it('uses custom path to mocha module', function (done) {
+    it('uses custom relative path to mocha module', function (done) {
       var b = browserify(bundleOptionsBare);
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, {
         node: true,
         mochaPath : './node_modules/mocha'
+      });
+      run('node', [], b, function (err, code) {
+        assert.equal(code, 0);
+        done(err);
+      });
+    });
+
+    it('uses custom absolute path to mocha module', function (done) {
+      var b = browserify(bundleOptionsBare);
+      b.add('./test/fixture/test-pass');
+      b.plugin(mocaccino, {
+        node: true,
+        mochaPath : path.join(process.cwd(), 'node_modules', 'mocha')
       });
       run('node', [], b, function (err, code) {
         assert.equal(code, 0);
