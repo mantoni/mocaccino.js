@@ -1,5 +1,12 @@
 # Changes
 
+## 4.1.1
+
+- [`fc0eb96`](https://github.com/mantoni/mocaccino.js/commit/fc0eb96deeaeb57d0f7c515177a1bfa418fcd837)
+  Fix problems with absolute custom mocha path (#25) (Christopher Hiller)
+
+_Released by [Maximilian Antoni](https://github.com/mantoni) on 2019-03-12._
+
 ## 4.1.0
 
 Adds the `mochaPath` option to specify a custom path to resolve mocha.
