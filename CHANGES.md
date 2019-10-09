@@ -1,5 +1,12 @@
 # Changes
 
+## 4.1.2
+
+- [`f46487a`](https://github.com/mantoni/mocaccino.js/commit/f46487a16d1da04bcad60d111ea98b900e2b62e4)
+  Do not assume `process.nextTick` exists
+
+_Released by [Maximilian Antoni](https://github.com/mantoni) on 2019-10-09._
+
 ## 4.1.1
 
 - [`fc0eb96`](https://github.com/mantoni/mocaccino.js/commit/fc0eb96deeaeb57d0f7c515177a1bfa418fcd837)
