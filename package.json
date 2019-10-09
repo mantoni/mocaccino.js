@@ -39,7 +39,7 @@
     "url": "https://github.com/mantoni/mocaccino.js.git"
   },
   "dependencies": {
-    "brout": "^1.1.0",
+    "brout": "^1.3.0",
     "listen": "^1.0.0",
     "mocha": "^5.2.0",
     "resolve": "^1.8.1",
