@@ -5,7 +5,7 @@
  *
  * @license MIT
  */
-/*globals describe, it*/
+/*globals describe, it, Promise*/
 'use strict';
 
 var assert     = require('assert');
@@ -15,32 +15,105 @@ var listen     = require('listen');
 var spawn      = require('child_process').spawn;
 var mocaccino  = require('../lib/mocaccino');
 var path       = require('path');
+var puppeteer  = require('puppeteer');
+
+function broutHandler() {
+  if (typeof process === 'undefined') {
+    console.log('[EXIT 1]');
+    return;
+  }
+  var log = console.log.original;
+  process._brout.on('exit', function (code) {
+    log.call(console, '[EXIT ' + (code || 0) + ']');
+  });
+}
 
 function run(proc, args, b, done) {
-  var l = listen();
-  var p = spawn(proc, args);
-  var s = b.bundle();
-  s.on('error', function (err) {
-    done(err);
-  });
-  var out = '';
-  p.stdout.on('data', function (data) {
-    out += data;
-  });
-  p.stdout.on('end', l());
-  p.stderr.pipe(process.stderr);
-  var onClose = l('code');
-  p.on('close', function (code) {
-    onClose(null, code);
-  });
-  l.then(function (err, res) {
-    if (err) {
+  if (proc === 'node') {
+    var l = listen();
+    var p = spawn(proc, args);
+    var s = b.bundle();
+    s.on('error', function (err) {
       done(err);
-    } else {
-      done(null, res.code, out);
-    }
-  });
-  s.pipe(p.stdin);
+    });
+    var out = '';
+    p.stdout.on('data', function (data) {
+      out += data;
+    });
+    p.stdout.on('end', l());
+    p.stderr.pipe(process.stderr);
+    var onClose = l('code');
+    p.on('close', function (code) {
+      onClose(null, code);
+    });
+    l.then(function (err, res) {
+      if (err) {
+        done(err);
+      } else {
+        done(null, res.code, out);
+      }
+    });
+    s.pipe(p.stdin);
+  } else if (proc === 'chromium') {
+    b.bundle(function (err, result) {
+      var page = null;
+      var browser = null;
+      if (err) {
+        done(err, 1);
+        return;
+      }
+      puppeteer.launch()
+        .then(function (_browser) {
+          browser = _browser;
+          return browser.newPage();
+        })
+        .then(function (_page) {
+          page = _page;
+          return page.goto(
+            'file:' + path.dirname(__dirname) + '/test/fixture/index.html'
+          );
+        })
+        .then(function () {
+          return new Promise(function (resolve, reject) {
+            var buf = '';
+
+            page.on('console', function (msg) {
+              if (msg.type() !== 'log') {
+                return;
+              }
+
+              var text = msg.text();
+              if (text.indexOf('[EXIT ') === 0) {
+                var code = text.substring(6, text.length - 1);
+                resolve({ out: buf, code: parseInt(code, 10) });
+                return;
+              }
+              buf += text + '\n';
+            });
+
+            page.on('pageerror', reject);
+            page.on('error', reject);
+
+            Promise.all([
+              page.evaluate(result.toString()),
+              page.evaluate(broutHandler)
+            ])
+              .catch(reject);
+          });
+        })
+        .then(function (result) {
+          done(null, result.code, result.out);
+        })
+        .catch(function (err) {
+          done(err, 1);
+        })
+        .then(function () {
+          browser.close();
+        });
+    });
+  } else {
+    done(new Error('Cannot run tests for ' + proc));
+  }
 }
 
 
@@ -191,77 +264,77 @@ function invertedFlaggedGrepAssert(done) {
 
 describe('plugin', function () {
 
-  describe('phantomjs', function () {
+  describe('browser', function () {
     this.timeout(10000);
 
     it('passes test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino);
-      run('phantomic', [], b, passOutputAssert(done));
+      run('chromium', [], b, passOutputAssert(done));
     });
 
     it('passes --brout test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino);
-      run('phantomic', ['--brout'], b, passOutputAssert(done));
+      run('chromium', ['--brout'], b, passOutputAssert(done));
     });
 
     it('fails test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
-      run('phantomic', [], b, failOutputAssert(done));
+      run('chromium', [], b, failOutputAssert(done));
     });
 
     it('fails --brout test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
-      run('phantomic', ['--brout'], b, failOutputAssert(done));
+      run('chromium', ['--brout'], b, failOutputAssert(done));
     });
 
     it('filters tests when grep is set', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, { grep: '#flag' });
-      run('phantomic', [], b, flaggedGrepAssert(done));
+      run('chromium', [], b, flaggedGrepAssert(done));
     });
 
     it('does not filter tests when grep is not set', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino);
-      run('phantomic', [], b, unFlaggedGrepAssert(done));
+      run('chromium', [], b, unFlaggedGrepAssert(done));
     });
 
     it('treats string grep as a regular expression', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, { grep: 'with(out)?' });
-      run('phantomic', [], b, regexGrepAssert(done));
+      run('chromium', [], b, regexGrepAssert(done));
     });
 
     it('treats RegExp grep as a regular expression', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, { grep: /with(out)?/ });
-      run('phantomic', [], b, regexGrepAssert(done));
+      run('chromium', [], b, regexGrepAssert(done));
     });
 
     it('treats fgrep as an ordinary string', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fgrep');
       b.plugin(mocaccino, { fgrep: 'passes (.*)' });
-      run('phantomic', [], b, regexFgrepAssert(done));
+      run('chromium', [], b, regexFgrepAssert(done));
     });
 
     it('inverts filter when invert is set', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-grep');
       b.plugin(mocaccino, { grep: '#flag', invert: true });
-      run('phantomic', [], b, invertedFlaggedGrepAssert(done));
+      run('chromium', [], b, invertedFlaggedGrepAssert(done));
     });
 
     it('passes coverage', function (done) {
@@ -269,7 +342,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-pass');
       b.transform(coverify);
       b.plugin(mocaccino, { yields : 25 });
-      run('phantomic', [], b, coverage(function (code) {
+      run('chromium', [], b, coverage(function (code) {
         assert.equal(code, 0);
         done();
       }));
@@ -280,7 +353,7 @@ describe('plugin', function () {
       b.add('./test/fixture/cover-fail');
       b.transform(coverify);
       b.plugin(mocaccino, { yields : 25 });
-      run('phantomic', [], b, coverage(function (code) {
+      run('chromium', [], b, coverage(function (code) {
         assert.notEqual(code, 0);
         done();
       }));
@@ -290,7 +363,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { reporter : 'list' });
-      run('phantomic', [], b, function (err, code, out) {
+      run('chromium', [], b, function (err, code, out) {
         /*jslint regexp: true*/
         if (err) {
           done(err);
@@ -309,17 +382,12 @@ describe('plugin', function () {
         reporter : 'xunit',
         reporterOptions: { output: 'report.xml' }
       });
-      run('phantomic', [], b, function (err, code, out) {
+      run('chromium', [], b, function (err, code, out) {
         /*jslint regexp: true*/
-        if (err) {
-          done(err);
-        } else {
-          // We expect an error code since XUnit reporter
-          // does not support file output in browser
-          assert.equal(code, 1);
-          assert(/file output not supported in browser/.test(out), out);
-          done();
-        }
+        assert(!out);
+        assert.equal(code, 1);
+        assert(/file output not supported in browser/.test(err.message));
+        done();
       });
     });
 
@@ -327,7 +395,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { reporter : 'mocha-jenkins-reporter' });
-      run('phantomic', [], b, function (err, code, out) {
+      run('chromium', [], b, function (err, code, out) {
         /*jslint regexp: true*/
         if (err) {
           done(err);
@@ -343,21 +411,21 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { ui : 'bdd' });
-      run('phantomic', [], b, passOutputAssert(done));
+      run('chromium', [], b, passOutputAssert(done));
     });
 
     it('uses ui "tdd"', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-ui-tdd');
       b.plugin(mocaccino, { ui : 'tdd' });
-      run('phantomic', [], b, passOutputAssert(done));
+      run('chromium', [], b, passOutputAssert(done));
     });
 
     it('only', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-only');
       b.plugin(mocaccino);
-      run('phantomic', [], b, function (err, code) {
+      run('chromium', [], b, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -367,14 +435,14 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-require-mocha');
       b.plugin(mocaccino);
-      run('phantomic', [], b, passOutputAssert(done));
+      run('chromium', [], b, passOutputAssert(done));
     });
 
     it('uses timeout', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-timeout');
       b.plugin(mocaccino, { timeout : 100 });
-      run('phantomic', ['--brout'], b, function (err, code) {
+      run('chromium', ['--brout'], b, function (err, code) {
         assert.equal(code, 1);
         done(err);
       });
@@ -384,7 +452,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-window-width');
       b.plugin(mocaccino, { windowWidth : 123 });
-      run('phantomic', [], b, function (err, code) {
+      run('chromium', [], b, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -394,7 +462,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { colors : false, reporter : 'dot' });
-      run('phantomic', [], b, function (err, code, out) {
+      run('chromium', [], b, function (err, code, out) {
         assert.equal(code, 0);
         assert.equal(out.trim().split('\n')[0], '.');
         done(err);
@@ -405,7 +473,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { colors : true, reporter : 'dot' });
-      run('phantomic', [], b, function (err, code) {
+      run('chromium', [], b, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -415,7 +483,7 @@ describe('plugin', function () {
       var b = browserify();
       b.add('./test/fixture/test-pass');
       b.plugin(mocaccino, { mochaPath : './node_modules/mocha' });
-      run('phantomic', [], b, function (err, code) {
+      run('chromium', [], b, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
@@ -427,7 +495,7 @@ describe('plugin', function () {
       b.plugin(mocaccino, {
         mochaPath : path.join(process.cwd(), 'node_modules', 'mocha')
       });
-      run('phantomic', [], b, function (err, code) {
+      run('chromium', [], b, function (err, code) {
         assert.equal(code, 0);
         done(err);
       });
