@@ -54,11 +54,11 @@ function passOutputAssert(done) {
     if (err) {
       done(err);
     } else {
-      assert.equal(out, '1..1\n'
-        + 'ok 1 fixture passes\n'
+      assert.equal(out, 'ok 1 fixture passes\n'
         + '# tests 1\n'
         + '# pass 1\n'
-        + '# fail 0\n');
+        + '# fail 0\n'
+        + '1..1\n');
       assert.equal(code, 0);
       done();
     }
@@ -71,8 +71,8 @@ function failOutputAssert(done) {
       done(err);
     } else {
       assert.equal(code, 1);
-      assert.equal(out.substring(0, 28), '1..1\nnot ok 1 fixture fails\n');
-      assert(out.indexOf('# tests 1\n# pass 0\n# fail 1') > 1);
+      assert.equal(out.indexOf('not ok 1 fixture fails\n'), 0);
+      assert(out.indexOf('# tests 1\n# pass 0\n# fail 1\n1..1') > 1);
       done();
     }
   };
@@ -97,11 +97,11 @@ var NUM_TESTS_RE = /%num/g;
 
 function flaggedGrepAssert(done) {
   return function (err, code, out) {
-    var expected = '1..%num\n'
-      + 'ok %num fixture passes flag\n'
+    var expected = 'ok %num fixture passes flag\n'
       + '# tests %num\n'
       + '# pass %num\n'
-      + '# fail 0\n';
+      + '# fail 0\n'
+      + '1..%num\n';
 
     if (err) {
       done(err);
@@ -115,13 +115,13 @@ function flaggedGrepAssert(done) {
 
 function unFlaggedGrepAssert(done) {
   return function (err, code, out) {
-    var expected = '1..%num\n'
-      + 'ok 1 fixture passes flag\n'
+    var expected = 'ok 1 fixture passes flag\n'
       + 'ok 2 fixture passes without flag\n'
       + 'ok %num fixture passes with regex grep\n'
       + '# tests %num\n'
       + '# pass %num\n'
-      + '# fail 0\n';
+      + '# fail 0\n'
+      + '1..%num\n';
 
     if (err) {
       done(err);
@@ -135,12 +135,12 @@ function unFlaggedGrepAssert(done) {
 
 function regexGrepAssert(done) {
   return function (err, code, out) {
-    var expected = '1..%num\n'
-      + 'ok 1 fixture passes without flag\n'
+    var expected = 'ok 1 fixture passes without flag\n'
       + 'ok %num fixture passes with regex grep\n'
       + '# tests %num\n'
       + '# pass %num\n'
-      + '# fail 0\n';
+      + '# fail 0\n'
+      + '1..%num\n';
 
     if (err) {
       done(err);
@@ -154,11 +154,11 @@ function regexGrepAssert(done) {
 
 function regexFgrepAssert(done) {
   return function (err, code, out) {
-    var expected = '1..%num\n'
-      + 'ok 1 fixture passes (.*)\n'
+    var expected = 'ok 1 fixture passes (.*)\n'
       + '# tests %num\n'
       + '# pass %num\n'
-      + '# fail 0\n';
+      + '# fail 0\n'
+      + '1..%num\n';
 
     if (err) {
       done(err);
@@ -172,12 +172,12 @@ function regexFgrepAssert(done) {
 
 function invertedFlaggedGrepAssert(done) {
   return function (err, code, out) {
-    var expected = '1..%num\n'
-      + 'ok 1 fixture passes without flag\n'
+    var expected = 'ok 1 fixture passes without flag\n'
       + 'ok %num fixture passes with regex grep\n'
       + '# tests %num\n'
       + '# pass %num\n'
-      + '# fail 0\n';
+      + '# fail 0\n'
+      + '1..%num\n';
 
     if (err) {
       done(err);
