@@ -274,25 +274,11 @@ describe('plugin', function () {
       run('chromium', [], b, passOutputAssert(done));
     });
 
-    it('passes --brout test', function (done) {
-      var b = browserify();
-      b.add('./test/fixture/test-pass');
-      b.plugin(mocaccino);
-      run('chromium', ['--brout'], b, passOutputAssert(done));
-    });
-
     it('fails test', function (done) {
       var b = browserify();
       b.add('./test/fixture/test-fail');
       b.plugin(mocaccino);
       run('chromium', [], b, failOutputAssert(done));
-    });
-
-    it('fails --brout test', function (done) {
-      var b = browserify();
-      b.add('./test/fixture/test-fail');
-      b.plugin(mocaccino);
-      run('chromium', ['--brout'], b, failOutputAssert(done));
     });
 
     it('filters tests when grep is set', function (done) {
