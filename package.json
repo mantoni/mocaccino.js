@@ -23,7 +23,7 @@
   "homepage": "https://github.com/mantoni/mocaccino.js",
   "main": "./lib/mocaccino.js",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=12"
   },
   "scripts": {
     "watch": "mocha --watch",

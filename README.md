@@ -19,25 +19,8 @@ with a headless browser, on a Selenium grid, in the cloud with SauceLabs or
 generates a standalone HTML page to run the tests. The underlying modules can
 also be used as Browserify plugins.
 
-- [Phantomic][] for headless browser testing
 - [min-webdriver][] for Selenium and SauceLabs support
 - [Consolify][] to generate a standalone HTML page
-
-## Headless browser testing
-
-Browserify a test and run in a Phantom.JS with [Phantomic][]:
-
-```
-$ browserify -p mocaccino test.js | phantomic --brout
-```
-
-### Code coverage with headless browser
-
-Use the [Coverify][] transform and [Phantomic][]:
-
-```
-$ browserify -p mocaccino -t coverify test.js | phantomic --brout | coverify
-```
 
 ### Code coverage with node
 
@@ -76,7 +59,7 @@ I/O to happen. It's ignored if `--node` is given.
 
 ## Compatibility
 
-- Node 0.10 or later
+- Node 12 or later
 - Browserify 5.9 or later (since version 1.0.0)
 - Browserify 4.x (before 1.0.0)
 
@@ -90,7 +73,6 @@ MIT
 [Mocha]: http://mochajs.org/
 [Browserify]: http://browserify.org
 [Mochify]: https://github.com/mantoni/mochify.js
-[Phantomic]: https://github.com/mantoni/phantomic
 [min-webdriver]: https://github.com/mantoni/min-webdriver
 [Consolify]: https://github.com/mantoni/consolify
 [Coverify]: https://github.com/substack/coverify
