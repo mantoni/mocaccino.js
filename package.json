@@ -47,7 +47,7 @@
     "through2": "^2.0.5"
   },
   "devDependencies": {
-    "@studio/changes": "^1.7.0",
+    "@studio/changes": "^2.2.0",
     "browserify": "^16.2.3",
     "coverify": "^1.4.1",
     "eslint": "^5.9.0",
