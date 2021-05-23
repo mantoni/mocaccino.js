@@ -1,5 +1,32 @@
 # Changes
 
+## 5.0.0
+
+- 💥 [`2a6c8c9`](https://github.com/mantoni/mocaccino.js/commit/2a6c8c922765bb3ca01abd541ac40f24049bfcf2)
+  Update mocha to v8, adjust assertions (Frederik Ring)
+- 🍏 [`a90d13a`](https://github.com/mantoni/mocaccino.js/commit/a90d13a98b9db38be7bb625459a8ce7c88d1a764)
+  Port browser tests to use puppeteer (Frederik Ring)
+- 🐛 [`4382056`](https://github.com/mantoni/mocaccino.js/commit/4382056553ec27774483e8cac3d884e8dae31f9a)
+  Ensure brout is required before mocha (Frederik Ring)
+- 🐛 [`3fa740a`](https://github.com/mantoni/mocaccino.js/commit/3fa740a258b02bdfb2e0783fec4520a059a445da)
+  Pass in custom reporters in setup to work around dynamic require limitation (Frederik Ring)
+- 🛡 [`05ee03e`](https://github.com/mantoni/mocaccino.js/commit/05ee03ecd40ac9117c2aa490da8938610ebd542c)
+  npm audit
+- 🛡 [`7f1ae36`](https://github.com/mantoni/mocaccino.js/commit/7f1ae368f9732a270b95b20a788d3c82093980a1)
+  Bump lodash from 4.17.19 to 4.17.21 (dependabot[bot])
+- 🛡 [`637cb13`](https://github.com/mantoni/mocaccino.js/commit/637cb13990bbdabee46b4ee9d3ae2b8ae23d6235)
+  Bump elliptic from 6.4.1 to 6.5.4 (dependabot[bot])
+- 🛡 [`9a81451`](https://github.com/mantoni/mocaccino.js/commit/9a81451b806bcf3dc445b2927c8edd73f7ddc029)
+  Bump js-yaml from 3.12.0 to 3.14.0 (dependabot[bot])
+- 🛡 [`2fce39a`](https://github.com/mantoni/mocaccino.js/commit/2fce39a82b3690ae1f20e5814c8925b0097a16f4)
+  Bump lodash from 4.17.11 to 4.17.19 (dependabot[bot])
+- 📚 [`c29813f`](https://github.com/mantoni/mocaccino.js/commit/c29813fb727b86832324b3592c855e9039b89ec8)
+  Remove phantomic references from README and update engine requirements (Frederik Ring)
+- ✨ [`953e4ee`](https://github.com/mantoni/mocaccino.js/commit/953e4ee032af83c5b4e04b215cea557c8cc27316)
+  Upgrade Studio Changes
+
+_Released by [Maximilian Antoni](https://github.com/mantoni) on 2021-05-23._
+
 ## 4.1.2
 
 - [`f46487a`](https://github.com/mantoni/mocaccino.js/commit/f46487a16d1da04bcad60d111ea98b900e2b62e4)
