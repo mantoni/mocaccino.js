@@ -1,7 +1,7 @@
 # mocaccino
 
-[![Build Status](https://travis-ci.org/mantoni/mocaccino.js.svg?branch=master)](https://travis-ci.org/mantoni/mocaccino.js)
-[![SemVer]](http://semver.org)
+[![Node.js CI](https://github.com/mantoni/mocaccino.js/actions/workflows/node.js.yml/badge.svg)](https://github.com/mantoni/mocaccino.js/actions/workflows/node.js.yml)
+[![SemVer]](https://semver.org)
 [![License]](https://github.com/mantoni/mocaccino.js/blob/master/LICENSE)
 
 [Mocha][] test runner as a [Browserify][] plugin.
