@@ -668,7 +668,7 @@ describe('plugin', function () {
     it('enables colors', function (done) {
       var b = browserify(bundleOptionsBare);
       b.add('./test/fixture/test-pass');
-      b.plugin(mocaccino, { node : true, color : true, reporter : 'dot' });
+      b.plugin(mocaccino, { node : true, colors : true, reporter : 'dot' });
       run('node', [], b, function (err, code, out) {
         assert.equal(code, 0);
         assert.equal(out.trim().split('\n')[0], '\u001b[90m.\u001b[0m');
