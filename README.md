@@ -1,6 +1,6 @@
 # mocaccino
 
-[![Node.js CI](https://github.com/mantoni/mocaccino.js/actions/workflows/node.js.yml/badge.svg)](https://github.com/mantoni/mocaccino.js/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/mantoni/mocaccino.js/actions/workflows/test.yml/badge.svg)](https://github.com/mantoni/mocaccino.js/actions/workflows/test.yml)
 [![SemVer]](https://semver.org)
 [![License]](https://github.com/mantoni/mocaccino.js/blob/master/LICENSE)
 
