@@ -1,5 +1,25 @@
 # Changes
 
+## 6.0.0
+
+- 💥 [`4837604`](https://github.com/mantoni/mocaccino.js/commit/4837604058da7596514f12668c99fa784e8f3535)
+  Update mocha to 9.1.3 (#39) (Albert Wang)
+- 🛡 [`09f1a80`](https://github.com/mantoni/mocaccino.js/commit/09f1a80bede9e55279160f67edb878499185fc22)
+  Update npm dependencies (#38) (Albert Wang)
+    * Update eslint dependency to 8.5.0
+    * Update through2 dependency to 4.0.2
+    * Update supports-color dependency to v8.1.1
+    * Update puppeteer dependency to v13
+- 🛡 [`37403dc`](https://github.com/mantoni/mocaccino.js/commit/37403dce33af9fbf61645470211da1262f42a3f2)
+  Set up GitHub Actions (#37) (Albert Wang)
+    * Set up Github Actions
+    * Switch CI badge from Travis to Github Actions
+    * Recreate package-lock.json
+- 🛡 [`7e0d52d`](https://github.com/mantoni/mocaccino.js/commit/7e0d52db43e5d43ccabdabd92067f08640781514)
+  Fix test (#36) (Albert Wang)
+
+_Released by Frederik Ring on 2021-12-28._
+
 ## 5.0.0
 
 - 💥 [`2a6c8c9`](https://github.com/mantoni/mocaccino.js/commit/2a6c8c922765bb3ca01abd541ac40f24049bfcf2)
