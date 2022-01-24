@@ -1,5 +1,12 @@
 # Changes
 
+## 6.1.0
+
+- 🛡 [`fc6f1a5`](https://github.com/mantoni/mocaccino.js/commit/fc6f1a5595e54939c15ce53e5279d059bdeddc91)
+  Update mocha to 9.2.0 (#40) (Frederik Ring)
+
+_Released by Frederik Ring on 2022-01-24._
+
 ## 6.0.0
 
 - 💥 [`4837604`](https://github.com/mantoni/mocaccino.js/commit/4837604058da7596514f12668c99fa784e8f3535)
